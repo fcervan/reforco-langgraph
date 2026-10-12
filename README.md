@@ -13,7 +13,6 @@ Sem chave, tudo roda **offline** com Fake determinístico.
 
 - [x] 00 Visão Geral — lanchonete clássica vs grafo, tabela de tradução, chain vs graph
 - [x] 01 Setup — `uv` vs pip, `.env`+`getpass`, Groq, `invoke vs stream`, `AIMessage`
-- [ ] 01 Setup/Instalação — venv, `.env`+`getpass`, Groq, `invoke vs stream`, `Human/AIMessage`
 - [ ] 02 Grafos — `TypedDict`, nó, aresta, condicional, `compile/invoke`, overwrite
 - [ ] 03 Cadeias — `messages`, `bind_tools` (detecta, não executa), `add_messages`
 - [ ] 04 Roteadores — `ToolNode` + `tools_condition`
@@ -32,23 +31,43 @@ pip install -r requirements.txt
 # ou com uv (recomendado): uv venv && uv sync
 python src/aula00_visao_geral.py   # sem LLM, 100% offline
 python src/aula01_setup.py         # Groq real com GROQ_API_KEY, senão Fake
-python -m pytest tests/ -q         # 11 testes offline (+1 só com chave real)
+python -m pytest tests/ -q         # testes offline (+1 só com chave real)
 jupyter notebook notebooks/00_visao_geral.ipynb
 ```
 
-Com Groq real (opcional, a partir da Aula 01):
+Com Groq real (a partir da Aula 01):
 
 ```bash
 cp .env.example .env  # preencher GROQ_API_KEY
 ```
 
+## No Colab
+
+O notebook `01_setup.ipynb` é autocontido (a aula 00 também) e vem com uma
+**célula 0 de instalação** — ela roda `%pip install -q langgraph langchain-groq
+python-dotenv`, porque o Colab começa sem esses pacotes. Localmente, se você
+já fez `uv sync`, a célula é inofensivo (no-op).
+
+```python
+# dentro do Colab, uma vez por sessão
+!git clone https://github.com/fcervan/reforco-langgraph.git
+%cd reforco-langgraph
+!git pull                      # antes de cada vez que abrir
+%pip install -q -r requirements.txt
+# e cole a chave quando a célula 2 pedir (digitação oculta)
+```
+
+Por que `get_llm` cai no Fake se o pacote faltar: sem isso, adicionar a chave
+num Colab recém-criado estourava `ModuleNotFoundError` no meio da aula. Agora
+ele avisa o comando de instalação e continua em modo offline.
+
 ## Estrutura
 
 ```
 src/aula00_visao_geral.py   # lanchonete clássica + mesmo fluxo em StateGraph
-src/aula01_setup.py         # get_llm() Groq-ou-Fake + demo invoke/stream
+src/aula01_setup.py         # get_llm() Groq-ou-Fake (tolera falta do pacote) + invoke/stream
 notebooks/00_visao_geral.ipynb  # 11 células: analogia, 3 codes, dissecção, erros, desafio
-notebooks/01_setup.ipynb        # 14 células: uv vs pip, chave, temperature, stream, desafio
+notebooks/01_setup.ipynb        # 15 células: celula pip, uv vs pip, chave, temperature, stream
 src/aula02_grafo.py, aula03_cadeias.py, aula04_roteador.py  # espelhos (serão expandidos)
 tests/test_aula00.py ...    # offline, determinístico
 ```

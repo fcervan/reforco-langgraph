@@ -25,15 +25,26 @@ def tem_chave() -> bool:
 
 
 def get_llm(temperature: float = 0):
-    """Retorna (llm, origem) onde origem é 'groq' ou 'fake'."""
-    if tem_chave():
-        from langchain_groq import ChatGroq
+    """Retorna (llm, origem) onde origem é 'groq' ou 'fake'.
 
-        return ChatGroq(model=MODELO, temperature=temperature), "groq"
+    Se houver chave mas o pacote langchain_groq não estiver instalado
+    (ex: Colab recém-criado), cai no Fake com aviso do comando de instalação
+    em vez de estourar ModuleNotFoundError no meio da aula.
+    """
+    if tem_chave():
+        try:
+            from langchain_groq import ChatGroq
+        except ImportError:
+            print(
+                "AVISO: langchain_groq ausente -> instale com "
+                "`pip install langchain-groq` (ou %pip install no Colab)."
+            )
+        else:
+            return ChatGroq(model=MODELO, temperature=temperature), "groq"
     from langchain_core.language_models.fake_chat_models import FakeMessagesListChatModel
     from langchain_core.messages import AIMessage
 
-    print("AVISO: sem GROQ_API_KEY — modo Fake offline (mecânica igual, texto simulado).")
+    print("AVISO: modo Fake offline (mecânica igual, texto simulado).")
     fake = FakeMessagesListChatModel(
         responses=[AIMessage(content="Olá! Sou uma resposta simulada para estudo offline.")]
     )

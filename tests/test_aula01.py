@@ -28,6 +28,17 @@ def test_stream_soma_igual_invoke(monkeypatch):
     assert via_stream == via_invoke
 
 
+def test_chave_sem_pacote_cai_no_fake(monkeypatch):
+    """Tem chave, mas langchain_groq não está instalado (ex: Colab cru)."""
+    import sys
+
+    monkeypatch.setenv("GROQ_API_KEY", "chave-ficticia")
+    monkeypatch.setitem(sys.modules, "langchain_groq", None)  # força ImportError
+    llm, origem = get_llm()
+    assert origem == "fake"
+    assert tem_chave()  # a chave existe; o que falta é o pacote
+
+
 @pytest.mark.skipif(not os.getenv("GROQ_API_KEY"), reason="só com chave real")
 def test_groq_real_responde():
     llm, origem = get_llm()
