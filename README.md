@@ -62,6 +62,8 @@ e não funciona nas células do Colab. O fluxo oficial é upload manual:
    ela: `%pip install -q ...` porque o Colab vem sem esses pacotes. Localmente,
    com `uv sync` feito, ela é inofensivo (no-op).
 4. Cole a `GROQ_API_KEY` quando a célula pedir (digitação oculta, nada é salvo).
+   Da Aula 03 em diante, todo notebook que usa Groq tem **célula de chave
+   dedicada** (CÉLULA 1): sem chave ele segue no Fake offline.
 5. Quando sair versão nova da aula: baixe de novo e repita (ou *Desconectar e
    descartar edições* antes, para nunca trabalhar em cima de versão velha).
 
@@ -83,7 +85,7 @@ notebooks/00_visao_geral.ipynb  # 11 células: analogia, 3 codes, dissecção, e
 notebooks/01_setup.ipynb        # 17 células: célula pip, uv vs pip, chave, raciocínio, stream, diagnóstico
 notebooks/02_grafos.ipynb       # 30 células: célula pip, analogia, minimal, dissecção, 7 variações, exercício, desafio
 src/aula03_cadeias.py         # cardápio [multiply, soma] + demos de overwrite/MessagesState
-notebooks/03_cadeias.ipynb      # 19 células: 4 mensagens, bind_tools, tool_calls, overwrite, MessagesState
+notebooks/03_cadeias.ipynb      # 20 células: célula pip, célula de chave, 4 mensagens, bind_tools, overwrite, MessagesState
 src/aula04_roteador.py  # espelho (será expandido)
 tests/test_aula00.py ...    # offline, determinístico
 ```
