@@ -1,5 +1,7 @@
 # Reforço LangGraph — do zero até Schemas Múltiplos
 
+[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb)
+
 Estudo aula a aula para dev clássico/determinístico entender LangGraph
 de verdade: cada notebook tem analogia com `função + dict + if/else`,
 código dissecado linha a linha, variações que quebram, erros comuns
@@ -17,7 +19,8 @@ Sem chave, tudo roda **offline** com Fake determinístico.
 - [x] 00 Visão Geral — lanchonete clássica vs grafo, tabela de tradução, chain vs graph
 - [x] 01 Setup — `uv` vs pip, `.env`+`getpass`, Groq, `invoke vs stream`, `AIMessage`
 - [x] 01.1 (fix) — `reasoning_effort="low"`: modelo de raciocínio e o `content` vazio
-- [ ] 02 Grafos — `TypedDict`, nó, aresta, condicional, `compile/invoke`, overwrite
+- [x] 02 Grafos — `TypedDict`, nó, aresta, condicional, `compile/invoke`, overwrite,
+      visualização (`draw_mermaid`/`draw_ascii`) e 6 comportamentos que quebram em silêncio
 - [ ] 03 Cadeias — `messages`, `bind_tools` (detecta, não executa), `add_messages`
 - [ ] 04 Roteadores — `ToolNode` + `tools_condition`
 - [ ] 05 Agente ReAct, 06 Memória, 07 Schemas, 08 Reducers, 09 Schemas Múltiplos
@@ -70,11 +73,26 @@ ele avisa o comando de instalação e continua em modo offline.
 ```
 src/aula00_visao_geral.py   # lanchonete clássica + mesmo fluxo em StateGraph
 src/aula01_setup.py         # get_llm() Groq-ou-Fake (tolera falta do pacote) + invoke/stream
+src/aula02_grafo.py         # grafo de 3 nós + demos: overwrite, rota inexistente, chave fora do schema
 notebooks/00_visao_geral.ipynb  # 11 células: analogia, 3 codes, dissecção, erros, desafio
-notebooks/01_setup.ipynb        # 15 células: celula pip, uv vs pip, chave, temperature, stream
-src/aula02_grafo.py, aula03_cadeias.py, aula04_roteador.py  # espelhos (serão expandidos)
+notebooks/01_setup.ipynb        # 17 células: célula pip, uv vs pip, chave, raciocínio, stream, diagnóstico
+notebooks/02_grafos.ipynb       # 29 células: analogia, minimal, dissecção, 7 variações que quebram, exercício, desafio
+src/aula03_cadeias.py, aula04_roteador.py  # espelhos (serão expandidos)
 tests/test_aula00.py ...    # offline, determinístico
 ```
+
+## Comportamentos verificados na Aula 02 (LangGraph 1.2.x)
+
+| Situação | O que realmente acontece |
+|---|---|
+| roteador devolve nome inexistente | aviso `wrote to unknown channel branch:to:X, ignoring it` e **encerra sem erro** |
+| nó devolve chave fora do `TypedDict` | chave **ignorada** em silêncio |
+| `invoke` sem uma chave do estado | `KeyError` só quando um nó tenta ler |
+| dois nós escrevem a mesma chave em sequência | **último ganha** (`overwrite`); em paralelo, `InvalidUpdateError` (Aula 08) |
+| nó muta `state` e devolve `{}` | mudança **não** persiste |
+| aresta para nó inexistente / nó duplicado / sem `START` | `ValueError` na construção |
+| `Literal` no retorno do roteador | é **só hint** — `str` simples funciona |
+| `draw_ascii()` | exige `grandalf` (não instalado); `draw_mermaid()` sempre funciona |
 
 ## O que a Aula 00 ensina
 
