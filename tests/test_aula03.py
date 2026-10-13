@@ -24,7 +24,7 @@ def test_tool_call_vem_com_content_vazio_offline():
 
 
 def test_sem_reducer_historico_se_perde():
-    """Dois nós em sequência SEM add_messages: o 2o apaga o 1o."""
+    """Dois nós em sequência SEM add_messages: o 2º apaga o 1º."""
     from typing import TypedDict
 
     class SemReducer(TypedDict):

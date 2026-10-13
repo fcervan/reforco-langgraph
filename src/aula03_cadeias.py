@@ -80,7 +80,7 @@ def demo_pergunta(graph, pergunta: str) -> None:
 
 
 def demo_problema_overwrite() -> None:
-    """SEM reducer, o 2o nó apaga o histórico do 1o."""
+    """SEM reducer, o 2º nó apaga o histórico do 1º."""
     from typing import TypedDict
 
     class SemReducer(TypedDict):
@@ -143,4 +143,4 @@ if __name__ == "__main__":
 # 1. Pergunte "oi, tudo bem?" e observe tool_calls vazio (resposta direta).
 #    (Offline: o Fake sempre devolve o mesmo tool_call — troque-o no get_llm.)
 # 2. Com a chave Groq, pergunte "some 10 com 5" e confira se o LLM escolhe `soma`.
-# 3. Adicione uma 3a tool `dividir(a, b)` e veja o cardápio crescer.
+# 3. Adicione uma 3ª tool `dividir(a, b)` e veja o cardápio crescer.
