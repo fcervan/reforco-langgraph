@@ -27,7 +27,11 @@ def get_llm():
     if os.getenv("GROQ_API_KEY"):
         from langchain_groq import ChatGroq
 
-        return ChatGroq(model="openai/gpt-oss-20b", temperature=0).bind_tools([multiply])
+        # reasoning_effort="low": sem isso o gpt-oss gasta todos os tokens
+        # raciocinando e devolve content vazio -> tool_calls nunca aparece.
+        return ChatGroq(
+            model="openai/gpt-oss-20b", temperature=0, reasoning_effort="low"
+        ).bind_tools([multiply])
     from langchain_core.language_models.fake_chat_models import FakeMessagesListChatModel
 
     fake = AIMessage(

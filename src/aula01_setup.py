@@ -24,12 +24,16 @@ def tem_chave() -> bool:
     return bool(os.getenv("GROQ_API_KEY"))
 
 
-def get_llm(temperature: float = 0):
+def get_llm(temperature: float = 0, reasoning_effort: str = "low"):
     """Retorna (llm, origem) onde origem é 'groq' ou 'fake'.
 
-    Se houver chave mas o pacote langchain_groq não estiver instalado
-    (ex: Colab recém-criado), cai no Fake com aviso do comando de instalação
-    em vez de estourar ModuleNotFoundError no meio da aula.
+    `reasoning_effort` controla o ORÇAMENTO de tokens que o modelo gasta
+    raciocinando antes de responder (low/medium/high; não existe "off").
+    Modelos como `openai/gpt-oss-20b` primeiro raciocinam e só depois
+    escrevem: com esforço alto eles gastam todos os tokens de conclusão
+    pensando, estouram em `finish_reason: length` e devolvem `content`
+    VAZIO (o raciocínio fica em `additional_kwargs['reasoning_content']`).
+    Para estudos, tools e agentes -> use "low": resposta rápida e previsível.
     """
     if tem_chave():
         try:
@@ -40,7 +44,12 @@ def get_llm(temperature: float = 0):
                 "`pip install langchain-groq` (ou %pip install no Colab)."
             )
         else:
-            return ChatGroq(model=MODELO, temperature=temperature), "groq"
+            return (
+                ChatGroq(
+                    model=MODELO, temperature=temperature, reasoning_effort=reasoning_effort
+                ),
+                "groq",
+            )
     from langchain_core.language_models.fake_chat_models import FakeMessagesListChatModel
     from langchain_core.messages import AIMessage
 

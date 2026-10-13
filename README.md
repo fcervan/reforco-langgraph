@@ -6,13 +6,17 @@ código dissecado linha a linha, variações que quebram, erros comuns
 e desafio. Sem matemática de LLM.
 
 Padrão: Groq como LLM primário (`GROQ_API_KEY` via `.env`, nunca versionado),
-modelo padrão `openai/gpt-oss-20b`.
+modelo padrão `openai/gpt-oss-20b`, **sempre com `reasoning_effort="low"`**
+(modelo de raciocínio: sem isso ele gasta todo o orçamento de tokens pensando,
+estoura em `finish_reason: length` e devolve `content` vazio — ver seção 3.1
+da Aula 01).
 Sem chave, tudo roda **offline** com Fake determinístico.
 
 ## Status (novo padrão didático, 1 notebook por entrega)
 
 - [x] 00 Visão Geral — lanchonete clássica vs grafo, tabela de tradução, chain vs graph
 - [x] 01 Setup — `uv` vs pip, `.env`+`getpass`, Groq, `invoke vs stream`, `AIMessage`
+- [x] 01.1 (fix) — `reasoning_effort="low"`: modelo de raciocínio e o `content` vazio
 - [ ] 02 Grafos — `TypedDict`, nó, aresta, condicional, `compile/invoke`, overwrite
 - [ ] 03 Cadeias — `messages`, `bind_tools` (detecta, não executa), `add_messages`
 - [ ] 04 Roteadores — `ToolNode` + `tools_condition`
