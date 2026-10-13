@@ -48,21 +48,25 @@ Com Groq real (a partir da Aula 01):
 cp .env.example .env  # preencher GROQ_API_KEY
 ```
 
-## No Colab
+## No Colab (upload manual, um arquivo por vez)
 
-O notebook `01_setup.ipynb` é autocontido (a aula 00 também) e vem com uma
-**célula 0 de instalação** — ela roda `%pip install -q langgraph langchain-groq
-python-dotenv`, porque o Colab começa sem esses pacotes. Localmente, se você
-já fez `uv sync`, a célula é inofensivo (no-op).
+O repo no GitHub é **privado**, então `git clone https://...` pede usuário/senha
+e não funciona nas células do Colab. O fluxo oficial é upload manual:
 
-```python
-# dentro do Colab, uma vez por sessão
-!git clone https://github.com/fcervan/reforco-langgraph.git
-%cd reforco-langgraph
-!git pull                      # antes de cada vez que abrir
-%pip install -q -r requirements.txt
-# e cole a chave quando a célula 2 pedir (digitação oculta)
-```
+1. Baixe o `.ipynb` da aula (página do arquivo no GitHub → `Raw` → salvar, ou
+   `git pull` local + upload pelo painel de arquivos do Colab).
+2. Faça upload no Colab (`Arquivo → Fazer upload de notebook`, ou arraste para
+   o painel de arquivos).
+3. **Rode a CÉLULA 0 primeiro** — todo notebook (01, 02 e os próximos) começa com
+   ela: `%pip install -q ...` porque o Colab vem sem esses pacotes. Localmente,
+   com `uv sync` feito, ela é inofensivo (no-op).
+4. Cole a `GROQ_API_KEY` quando a célula pedir (digitação oculta, nada é salvo).
+5. Quando sair versão nova da aula: baixe de novo e repita (ou *Desconectar e
+   descartar edições* antes, para nunca trabalhar em cima de versão velha).
+
+> Nota: os badges "Abrir no Colab" no topo funcionam para o dono do repo logado
+> com a integração GitHub do Colab; para terceiros dariam 404 enquanto o repo
+> for privado.
 
 Por que `get_llm` cai no Fake se o pacote faltar: sem isso, adicionar a chave
 num Colab recém-criado estourava `ModuleNotFoundError` no meio da aula. Agora
