@@ -1,6 +1,6 @@
 # Reforço LangGraph — do zero até Schemas Múltiplos
 
-[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb)
+[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb)
 
 Estudo aula a aula para dev clássico/determinístico entender LangGraph
 de verdade: cada notebook tem analogia com `função + dict + if/else`,
@@ -21,7 +21,8 @@ Sem chave, tudo roda **offline** com Fake determinístico.
 - [x] 01.1 (fix) — `reasoning_effort="low"`: modelo de raciocínio e o `content` vazio
 - [x] 02 Grafos — `TypedDict`, nó, aresta, condicional, `compile/invoke`, overwrite,
       visualização (`draw_mermaid`/`draw_ascii`) e 6 comportamentos que quebram em silêncio
-- [ ] 03 Cadeias — `messages`, `bind_tools` (detecta, não executa), `add_messages`
+- [x] 03 Cadeias — 4 tipos de mensagem, `bind_tools` (pede, não executa), `tool_calls`
+      dissecado, problema do overwrite em `messages`, `add_messages` + `MessagesState`
 - [ ] 04 Roteadores — `ToolNode` + `tools_condition`
 - [ ] 05 Agente ReAct, 06 Memória, 07 Schemas, 08 Reducers, 09 Schemas Múltiplos
 
@@ -80,8 +81,10 @@ src/aula01_setup.py         # get_llm() Groq-ou-Fake (tolera falta do pacote) + 
 src/aula02_grafo.py         # grafo de 3 nós + demos: overwrite, rota inexistente, chave fora do schema
 notebooks/00_visao_geral.ipynb  # 11 células: analogia, 3 codes, dissecção, erros, desafio
 notebooks/01_setup.ipynb        # 17 células: célula pip, uv vs pip, chave, raciocínio, stream, diagnóstico
-notebooks/02_grafos.ipynb       # 29 células: analogia, minimal, dissecção, 7 variações que quebram, exercício, desafio
-src/aula03_cadeias.py, aula04_roteador.py  # espelhos (serão expandidos)
+notebooks/02_grafos.ipynb       # 30 células: célula pip, analogia, minimal, dissecção, 7 variações, exercício, desafio
+src/aula03_cadeias.py         # cardápio [multiply, soma] + demos de overwrite/MessagesState
+notebooks/03_cadeias.ipynb      # 19 células: 4 mensagens, bind_tools, tool_calls, overwrite, MessagesState
+src/aula04_roteador.py  # espelho (será expandido)
 tests/test_aula00.py ...    # offline, determinístico
 ```
 
