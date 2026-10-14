@@ -1,6 +1,6 @@
 # Reforço LangGraph — do zero até Schemas Múltiplos
 
-[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) [![Abrir 07 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb)
+[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) [![Abrir 07 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb) [![Abrir 08 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/08_reducers.ipynb)
 
 Estudo aula a aula para dev clássico/determinístico entender LangGraph
 de verdade: cada notebook tem analogia com `função + dict + if/else`,
@@ -31,7 +31,9 @@ Sem chave, tudo roda **offline** com Fake determinístico.
       isolamento entre threads, `get_state`/`get_state_history`, `ValueError` sem thread
 - [x] 07 Schemas — `TypedDict` (só hint), `dataclass` (atributo, sem fiscalizar),
       `Pydantic` (valida: `Literal` barra, validator normaliza)
-- [ ] 08 Reducers, 09 Schemas Múltiplos
+- [x] 08 Reducers — `overwrite` vs `operator.add`, fan-out que quebra, custom
+      tolerante a `None`, 3 poderes do `add_messages`, estado estendido
+- [ ] 09 Schemas Múltiplos
 
 Mapeia `Curso_Introdutorio_de_Langgraph/module-1` e `modulo-2`.
 
@@ -101,6 +103,8 @@ src/aula06_memoria.py         # ReAct + demos transitorio/memória/isolamento/se
 notebooks/06_memoria.ipynb      # 20 células: sessão, prova do esquecimento, reidratação, raio-X, exercício, desafio
 src/aula07_schemas.py         # mesmo grafo em TD/DC/PY + demos do bravo
 notebooks/07_schemas.ipynb      # 19 células: 3 contratos, acesso, bravo, extra, normalizador, exercício, desafio
+src/aula08_reducers.py        # overwrite, fan-out, operator.add, custom, add_messages, estendido
+notebooks/08_reducers.ipynb     # 18 células: célula pip, quebra, [1,2,3,3], None, 3 poderes, exercício, desafio
 tests/test_aula00.py ...    # offline, determinístico
 ```
 
@@ -157,6 +161,16 @@ tests/test_aula00.py ...    # offline, determinístico
 | `@field_validator` com `Literal` | o `Literal` barra primeiro; o custom serve para normalizar |
 | nó em grafo DC/PY | recebe a **instância** (`state.name`); resultado do `invoke` é **dict** |
 | chave extra no Pydantic | **ignorada** por padrão (sem erro) |
+
+## Comportamentos verificados na Aula 08 (LangGraph 1.2.x)
+
+| Situação | O que realmente acontece |
+|---|---|
+| fan-out sem reducer | `InvalidUpdateError: At key 'foo': Can receive only one value per step...` |
+| fan-out com `operator.add` | acumula: `[1]` → `[1, 2]` → `[1, 2, 3, 3]` (paralelos leem o mesmo retrato) |
+| `add` com `None` | `TypeError: can only concatenate list (not "NoneType") to list` |
+| reducer custom | tolera `None`, limita, mescla "à sua maneira" |
+| `add_messages` por `id` igual | **substitui** em vez de anexar; `RemoveMessage(id)` apaga |
 
 ## O que a Aula 00 ensina
 
