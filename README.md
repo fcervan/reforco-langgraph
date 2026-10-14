@@ -1,6 +1,6 @@
 # Reforço LangGraph — do zero até Schemas Múltiplos
 
-[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb)
+[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb)
 
 Estudo aula a aula para dev clássico/determinístico entender LangGraph
 de verdade: cada notebook tem analogia com `função + dict + if/else`,
@@ -27,7 +27,9 @@ Sem chave, tudo roda **offline** com Fake determinístico.
       dissecado, tool fora da lista, exceção na tool, 2 pedidos de uma vez
 - [x] 05 Agente ReAct — a volta `tools -> assistant`, loop pensar-agir-observar,
       condição de parada, `recursion_limit`, `SystemMessage` na chamada vs no estado
-- [ ] 06 Memória, 07 Schemas, 08 Reducers, 09 Schemas Múltiplos
+- [x] 06 Memória — estado transitório, `MemorySaver` + `thread_id`, reidratação,
+      isolamento entre threads, `get_state`/`get_state_history`, `ValueError` sem thread
+- [ ] 07 Schemas, 08 Reducers, 09 Schemas Múltiplos
 
 Mapeia `Curso_Introdutorio_de_Langgraph/module-1` e `modulo-2`.
 
@@ -93,6 +95,8 @@ src/aula04_roteador.py        # porteiro + caixa [multiply, soma] + demos de fal
 notebooks/04_roteadores.ipynb   # 20 células: tools_condition, ToolNode, ToolMessage, 3 falhas, exercício, desafio
 src/aula05_agente.py          # ReAct [add, multiply, divide] + demos sem-volta e limite de recursão
 notebooks/05_agente_react.ipynb # 20 células: a volta, ciclo, traço real, trava, SYS, exercício, desafio
+src/aula06_memoria.py         # ReAct + demos transitorio/memória/isolamento/sem-thread
+notebooks/06_memoria.ipynb      # 20 células: sessão, prova do esquecimento, reidratação, raio-X, exercício, desafio
 tests/test_aula00.py ...    # offline, determinístico
 ```
 
@@ -128,6 +132,17 @@ tests/test_aula00.py ...    # offline, determinístico
 | 3 contas encadeadas | `add(3,4)=7` → modelo fez `7×2=14` de cabeça → `divide(14,5)=2.8` → frase final (decomposição é do LLM, afirme o resultado) |
 | `recursion_limit` estourado | `GraphRecursionError: Recursion limit of N reached...` (padrão: 25) |
 | `SystemMessage` só na chamada | não polui o estado; gravado no estado, viaja no histórico |
+
+## Comportamentos verificados na Aula 06 (LangGraph 1.2.x, Groq gpt-oss-20b)
+
+| Situação | O que realmente acontece |
+|---|---|
+| 2 `invoke`s sem checkpointer | "dois universos": turno 2 (real) chutou `2` sem nunca ter visto o `7` |
+| mesma `thread_id` + checkpointer | turno 2 reidrata: `7` → `14`, estado com 8 mensagens |
+| `thread_id` diferente | isolamento total (a outra thread não vê nada) |
+| grafo com checkpointer sem `config` | `ValueError: Checkpointer requires ... thread_id ...` |
+| `get_state_history` | um checkpoint por passo (10 na conversa de 2 turnos) |
+| `MemorySaver` | RAM: morre com o processo (produção: SQLite/Postgres) |
 
 ## O que a Aula 00 ensina
 
