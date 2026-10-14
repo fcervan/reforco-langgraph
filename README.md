@@ -1,6 +1,6 @@
 # Reforço LangGraph — do zero até Schemas Múltiplos
 
-[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb)
+[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb)
 
 Estudo aula a aula para dev clássico/determinístico entender LangGraph
 de verdade: cada notebook tem analogia com `função + dict + if/else`,
@@ -23,7 +23,8 @@ Sem chave, tudo roda **offline** com Fake determinístico.
       visualização (`draw_mermaid`/`draw_ascii`) e 6 comportamentos que quebram em silêncio
 - [x] 03 Cadeias — 4 tipos de mensagem, `bind_tools` (pede, não executa), `tool_calls`
       dissecado, problema do overwrite em `messages`, `add_messages` + `MessagesState`
-- [ ] 04 Roteadores — `ToolNode` + `tools_condition`
+- [x] 04 Roteadores — `tools_condition` (porteiro), `ToolNode` (caixa), `ToolMessage`
+      dissecado, tool fora da lista, exceção na tool, 2 pedidos de uma vez
 - [ ] 05 Agente ReAct, 06 Memória, 07 Schemas, 08 Reducers, 09 Schemas Múltiplos
 
 Mapeia `Curso_Introdutorio_de_Langgraph/module-1` e `modulo-2`.
@@ -86,7 +87,8 @@ notebooks/01_setup.ipynb        # 17 células: célula pip, uv vs pip, chave, ra
 notebooks/02_grafos.ipynb       # 30 células: célula pip, analogia, minimal, dissecção, 7 variações, exercício, desafio
 src/aula03_cadeias.py         # cardápio [multiply, soma] + demos de overwrite/MessagesState
 notebooks/03_cadeias.ipynb      # 20 células: célula pip, célula de chave, 4 mensagens, bind_tools, overwrite, MessagesState
-src/aula04_roteador.py  # espelho (será expandido)
+src/aula04_roteador.py        # porteiro + caixa [multiply, soma] + demos de falha
+notebooks/04_roteadores.ipynb   # 20 células: tools_condition, ToolNode, ToolMessage, 3 falhas, exercício, desafio
 tests/test_aula00.py ...    # offline, determinístico
 ```
 
@@ -102,6 +104,17 @@ tests/test_aula00.py ...    # offline, determinístico
 | aresta para nó inexistente / nó duplicado / sem `START` | `ValueError` na construção |
 | `Literal` no retorno do roteador | é **só hint** — `str` simples funciona |
 | `draw_ascii()` | exige `grandalf` (não instalado); `draw_mermaid()` sempre funciona |
+
+## Comportamentos verificados na Aula 04 (LangGraph 1.2.x, Groq gpt-oss-20b)
+
+| Situação | O que realmente acontece |
+|---|---|
+| `tools_condition` com `tool_calls` | devolve `"tools"`; sem, devolve `"__end__"` |
+| `ToolNode` executa | um `ToolMessage` por pedido, `content` sempre string (`12` vira `'12'`) |
+| `tool_call_id` do recibo | **igual ao `id`** do pedido (grampo recibo-pedido) |
+| tool fora da lista do `ToolNode` | **não quebra**: `ToolMessage` com `Error: ... is not a valid tool` |
+| exceção **dentro** da tool (`1/0`) | **propaga** (`ZeroDivisionError` mata o `invoke`) |
+| dois `tool_calls` juntos | dois `ToolMessage`, cada um com seu `id` |
 
 ## O que a Aula 00 ensina
 
