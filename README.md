@@ -1,6 +1,6 @@
 # Reforço LangGraph — do zero até Schemas Múltiplos
 
-[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb)
+[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb)
 
 Estudo aula a aula para dev clássico/determinístico entender LangGraph
 de verdade: cada notebook tem analogia com `função + dict + if/else`,
@@ -25,7 +25,9 @@ Sem chave, tudo roda **offline** com Fake determinístico.
       dissecado, problema do overwrite em `messages`, `add_messages` + `MessagesState`
 - [x] 04 Roteadores — `tools_condition` (porteiro), `ToolNode` (caixa), `ToolMessage`
       dissecado, tool fora da lista, exceção na tool, 2 pedidos de uma vez
-- [ ] 05 Agente ReAct, 06 Memória, 07 Schemas, 08 Reducers, 09 Schemas Múltiplos
+- [x] 05 Agente ReAct — a volta `tools -> assistant`, loop pensar-agir-observar,
+      condição de parada, `recursion_limit`, `SystemMessage` na chamada vs no estado
+- [ ] 06 Memória, 07 Schemas, 08 Reducers, 09 Schemas Múltiplos
 
 Mapeia `Curso_Introdutorio_de_Langgraph/module-1` e `modulo-2`.
 
@@ -89,6 +91,8 @@ src/aula03_cadeias.py         # cardápio [multiply, soma] + demos de overwrite/
 notebooks/03_cadeias.ipynb      # 20 células: célula pip, célula de chave, 4 mensagens, bind_tools, overwrite, MessagesState
 src/aula04_roteador.py        # porteiro + caixa [multiply, soma] + demos de falha
 notebooks/04_roteadores.ipynb   # 20 células: tools_condition, ToolNode, ToolMessage, 3 falhas, exercício, desafio
+src/aula05_agente.py          # ReAct [add, multiply, divide] + demos sem-volta e limite de recursão
+notebooks/05_agente_react.ipynb # 20 células: a volta, ciclo, traço real, trava, SYS, exercício, desafio
 tests/test_aula00.py ...    # offline, determinístico
 ```
 
@@ -115,6 +119,15 @@ tests/test_aula00.py ...    # offline, determinístico
 | tool fora da lista do `ToolNode` | **não quebra**: `ToolMessage` com `Error: ... is not a valid tool` |
 | exceção **dentro** da tool (`1/0`) | **propaga** (`ZeroDivisionError` mata o `invoke`) |
 | dois `tool_calls` juntos | dois `ToolMessage`, cada um com seu `id` |
+
+## Comportamentos verificados na Aula 05 (LangGraph 1.2.x, Groq gpt-oss-20b)
+
+| Situação | O que realmente acontece |
+|---|---|
+| aresta `tools -> assistant` | cria o loop; sem ela (Aula 04), o recibo nunca é relido |
+| 3 contas encadeadas | `add(3,4)=7` → modelo fez `7×2=14` de cabeça → `divide(14,5)=2.8` → frase final (decomposição é do LLM, afirme o resultado) |
+| `recursion_limit` estourado | `GraphRecursionError: Recursion limit of N reached...` (padrão: 25) |
+| `SystemMessage` só na chamada | não polui o estado; gravado no estado, viaja no histórico |
 
 ## O que a Aula 00 ensina
 
