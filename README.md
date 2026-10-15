@@ -1,6 +1,6 @@
 # Reforço LangGraph — do zero até Schemas Múltiplos
 
-[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) [![Abrir 07 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb) [![Abrir 08 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/08_reducers.ipynb) [![Abrir 09 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/09_schemas_multiplos.ipynb) [![Abrir 10 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/10_filtro_corte.ipynb) [![Abrir 11 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/11_streaming_hitl.ipynb) [![Abrir 12 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/12_breakpoints.ipynb) [![Abrir 13 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/13_feedback_humano.ipynb) [![Abrir 14 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/14_breakpoints_dinamicos.ipynb)
+[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) [![Abrir 07 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb) [![Abrir 08 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/08_reducers.ipynb) [![Abrir 09 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/09_schemas_multiplos.ipynb) [![Abrir 10 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/10_filtro_corte.ipynb) [![Abrir 11 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/11_streaming_hitl.ipynb) [![Abrir 12 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/12_breakpoints.ipynb) [![Abrir 13 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/13_feedback_humano.ipynb) [![Abrir 14 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/14_breakpoints_dinamicos.ipynb) [![Abrir 15 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/15_viagem_tempo.ipynb)
 
 Estudo aula a aula para dev clássico/determinístico entender LangGraph
 de verdade: cada notebook tem analogia com `função + dict + if/else`,
@@ -48,8 +48,9 @@ Sem chave, tudo roda **offline** com Fake determinístico.
       `as_node` + nó placeholder, correção de pedido parado
 - [x] 14 Breakpoints dinâmicos — `raise NodeInterrupt` por regra (depreciado),
       `interrupt()` + `Command(resume=)`, motivo em `tasks[].interrupts`
-- [ ] 15 Viagem no tempo; 16 Paralelização; 17 Sub-grafos;
-      18 Sub-grafos no LangSmith; 19 MapReduce
+- [x] 15 Viagem no tempo — `get_state_history` (novo→antigo), replay com config
+      antiga, fork com `update_state` (mesmo `id` substitui, novo anexa)
+- [ ] 16 Paralelização; 17 Sub-grafos; 18 Sub-grafos no LangSmith; 19 MapReduce
 
 Mapeia `Curso_Introdutorio_de_Langgraph/module-1` e `modulo-2`.
 
@@ -133,6 +134,8 @@ src/aula13_feedback.py        # corrige pedido, anexa contexto, feedback assinad
 notebooks/13_feedback_humano.ipynb # 18 células: caneta vermelha, correção, anexo, as_node, placeholder, exercício, desafio
 src/aula14_dinamico.py        # régua (NodeInterrupt), trava, desconto, API nova com Command
 notebooks/14_breakpoints_dinamicos.ipynb # 17 células: régua, motivo, trava, API nova, estático, exercício, desafio
+src/aula15_tempo.py           # navega, reproduz, bifurca (Fake determinístico)
+notebooks/15_viagem_tempo.ipynb   # 17 células: fita, replay, fork, id novo, auditoria, desafio
 tests/test_aula00.py ...    # offline, determinístico
 ```
 
@@ -257,6 +260,15 @@ tests/test_aula00.py ...    # offline, determinístico
 | retomar sem mudar | reexecuta o nó → pausa de novo (preso; saída: `update_state` ou `Command`) |
 | `interrupt(motivo)` + `Command(resume=R)` | a chamada devolve `R` na retomada (humano responde no fluxo) |
 | estático vs régua em conta baixa | lista fixa pausa à toa; régua deixa passar |
+
+## Comportamentos verificados na Aula 15 (LangGraph 1.2.x)
+
+| Situação | O que realmente acontece |
+|---|---|
+| `get_state_history` | do mais novo (`[0]` = atual) ao mais antigo (`__start__`, vazio) |
+| replay `stream(None, config_antiga)` | reexecuta a partir dali; passado intacto (com LLM real pode divergir) |
+| fork com mesmo `id` | substitui a mensagem; com id novo, anexa (duplica) |
+| após `update_state` no passado | nada executa até `stream(None, fork_config)`; `get_state` mostra o ramo novo |
 
 ## O que a Aula 00 ensina
 
