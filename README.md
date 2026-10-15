@@ -1,6 +1,6 @@
 # Reforço LangGraph — do zero até Schemas Múltiplos
 
-[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) [![Abrir 07 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb) [![Abrir 08 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/08_reducers.ipynb) [![Abrir 09 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/09_schemas_multiplos.ipynb) [![Abrir 10 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/10_filtro_corte.ipynb) [![Abrir 11 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/11_streaming_hitl.ipynb)
+[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) [![Abrir 07 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb) [![Abrir 08 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/08_reducers.ipynb) [![Abrir 09 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/09_schemas_multiplos.ipynb) [![Abrir 10 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/10_filtro_corte.ipynb) [![Abrir 11 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/11_streaming_hitl.ipynb) [![Abrir 12 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/12_breakpoints.ipynb)
 
 Estudo aula a aula para dev clássico/determinístico entender LangGraph
 de verdade: cada notebook tem analogia com `função + dict + if/else`,
@@ -42,9 +42,10 @@ Sem chave, tudo roda **offline** com Fake determinístico.
       `invoke`, cortar por tokens (`trim_messages`: system, `start_on`, parcial)
 - [x] 11 Streaming — `stream` preguiçoso, modos `updates`/`values`/`messages`,
       `astream`, `astream_events` filtrado por nó
-- [ ] 12 Breakpoints; 13 Feedback humano; 14 Breakpoints dinâmicos;
-      15 Viagem no tempo; 16 Paralelização; 17 Sub-grafos;
-      18 Sub-grafos no LangSmith; 19 MapReduce
+- [x] 12 Breakpoints — `interrupt_before`/`after`, `__interrupt__`,
+      `get_state().next`, retomada com `stream(None, cfg)`
+- [ ] 13 Feedback humano; 14 Breakpoints dinâmicos; 15 Viagem no tempo;
+      16 Paralelização; 17 Sub-grafos; 18 Sub-grafos no LangSmith; 19 MapReduce
 
 Mapeia `Curso_Introdutorio_de_Langgraph/module-1` e `modulo-2`.
 
@@ -122,6 +123,8 @@ src/aula10_filtro_corte.py      # apagar, filtrar, trim, start_on, parcial, filt
 notebooks/10_filtro_corte.ipynb   # 19 células: comanda, 3 táticas, system/start_on/parcial, exercício, desafio
 src/aula11_streaming.py       # ReAct + demos updates/values/messages/tokens reais
 notebooks/11_streaming_hitl.ipynb # 21 células: rastreio, 3 modos, gerador, async, filtro por nó, desafio
+src/aula12_breakpoints.py      # fiscal: pausa/inspeciona/retoma + sem-sessão + after
+notebooks/12_breakpoints.ipynb  # 18 células: fiscal, pausa, carimbo, sem-sessão, after, exercício, desafio
 tests/test_aula00.py ...    # offline, determinístico
 ```
 
@@ -218,6 +221,16 @@ tests/test_aula00.py ...    # offline, determinístico
 | `updates` / `values` / `messages` | delta por nó / estado completo / tupla (chunk + `langgraph_node`) |
 | `asyncio.run()` no notebook | `RuntimeError` (kernel já tem loop); usar `await` direto, `asyncio.run` só em `.py` |
 | Fake criado dentro do nó com loop | cada volta zera a sequência → loop infinito (construir fora, reusar dentro) |
+
+## Comportamentos verificados na Aula 12 (LangGraph 1.2.x)
+
+| Situação | O que realmente acontece |
+|---|---|
+| `interrupt_before=["tools"]` | pausa antes do nó; chunk `__interrupt__`; `next == ("tools",)` |
+| `stream(None, cfg)` | retoma do checkpoint; ao fim, `next == ()` |
+| interrupt sem checkpointer | pausa sim; retomar com `None` morre (`EmptyInputError`) |
+| `interrupt_after=["assistant"]` | pausa depois do nó; aqui para no mesmo ponto |
+| Fake reusado entre grafos | sequência embaralhada (um Fake fresco por grafo) |
 
 ## O que a Aula 00 ensina
 
