@@ -1,69 +1,41 @@
-# Reforço LangGraph — do zero até Schemas Múltiplos
+# Reforço LangGraph — do zero ao MapReduce
 
-[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) [![Abrir 07 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb) [![Abrir 08 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/08_reducers.ipynb) [![Abrir 09 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/09_schemas_multiplos.ipynb) [![Abrir 10 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/10_filtro_corte.ipynb) [![Abrir 11 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/11_streaming_hitl.ipynb) [![Abrir 12 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/12_breakpoints.ipynb) [![Abrir 13 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/13_feedback_humano.ipynb) [![Abrir 14 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/14_breakpoints_dinamicos.ipynb) [![Abrir 15 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/15_viagem_tempo.ipynb) [![Abrir 16 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/16_paralelizacao.ipynb) [![Abrir 17 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/17_subgrafos.ipynb) [![Abrir 18 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/18_langsmith.ipynb) [![Abrir 19 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/19_mapreduce.ipynb)
+**Aprenda LangGraph como quem aprende a cozinhar: um conceito por vez, com a mão na massa.**
 
-Estudo aula a aula para dev clássico/determinístico entender LangGraph
-de verdade: cada notebook tem analogia com `função + dict + if/else`,
-código dissecado linha a linha, variações que quebram, erros comuns
-e desafio. Sem matemática de LLM.
+Este repositório é um curso de reforço sobre **LangGraph** — a ferramenta que transforma um modelo de linguagem (que só "conversa") em um **agente que executa tarefas**: ele consulta ferramentas, lembra de conversas passadas, pede aprovação humana antes de agir e organiza trabalhos em paralelo.
 
-Padrão: Groq como LLM primário (`GROQ_API_KEY` via `.env`, nunca versionado),
-modelo padrão `openai/gpt-oss-20b`, **sempre com `reasoning_effort="low"`**
-(modelo de raciocínio: sem isso ele gasta todo o orçamento de tokens pensando,
-estoura em `finish_reason: length` e devolve `content` vazio — ver seção 3.1
-da Aula 01).
-Sem chave, tudo roda **offline** com Fake determinístico.
+Cada aula é um notebook independente que você abre no Colab e executa célula por célula. Tudo é explicado com analogias de uma lanchonete (pedidos, caixa, fiscal, cozinha) e com código comentado linha a linha — sem matemática, sem pressa. Quando o assunto precisa de inteligência artificial de verdade usamos o Groq (gratuito); quando dá para aprender só com a mecânica, roda 100% offline, sem chave e sem custo.
 
-## Status (novo padrão didático, 1 notebook por entrega)
+Ao final das 20 aulas você saberá montar um agente completo: que entende pedidos fora de ordem, usa ferramentas, lembra entre mensagens, pede aprovação quando precisa e organiza tarefas paralelas — a base para aplicar no seu próprio projeto (como um avaliador automático de redações).
 
-- [x] 00 Visão Geral — lanchonete clássica vs grafo, tabela de tradução, chain vs graph
-- [x] 01 Setup — `uv` vs pip, `.env`+`getpass`, Groq, `invoke vs stream`, `AIMessage`
-- [x] 01.1 (fix) — `reasoning_effort="low"`: modelo de raciocínio e o `content` vazio
-- [x] 02 Grafos — `TypedDict`, nó, aresta, condicional, `compile/invoke`, overwrite,
-      visualização (`draw_mermaid`/`draw_ascii`) e 6 comportamentos que quebram em silêncio
-- [x] 03 Cadeias — 4 tipos de mensagem, `bind_tools` (pede, não executa), `tool_calls`
-      dissecado, problema do overwrite em `messages`, `add_messages` + `MessagesState`
-- [x] 04 Roteadores — `tools_condition` (porteiro), `ToolNode` (caixa), `ToolMessage`
-      dissecado, tool fora da lista, exceção na tool, 2 pedidos de uma vez
-- [x] 05 Agente ReAct — a volta `tools -> assistant`, loop pensar-agir-observar,
-      condição de parada, `recursion_limit`, `SystemMessage` na chamada vs no estado
-- [x] 06 Memória — estado transitório, `MemorySaver` + `thread_id`, reidratação,
-      isolamento entre threads, `get_state`/`get_state_history`, `ValueError` sem thread
-- [x] 07 Schemas — `TypedDict` (só hint), `dataclass` (atributo, sem fiscalizar),
-      `Pydantic` (valida: `Literal` barra, validator normaliza)
-- [x] 08 Reducers — `overwrite` vs `operator.add`, fan-out que quebra, custom
-      tolerante a `None`, 3 poderes do `add_messages`, estado estendido
-- [x] 09 Schemas Múltiplos — estado privado (viaja, some), `input_schema` /
-      `output_schema` (nomes novos; `input=`/`output=` depreciados)
+Padrão técnico: Groq como LLM primário (`GROQ_API_KEY` via `.env`, nunca versionado), modelo `openai/gpt-oss-20b` sempre com `reasoning_effort="low"`. Sem chave, tudo roda **offline** com Fake determinístico. Regras do projeto em [`AGENTS.md`](AGENTS.md).
 
-## Bloco 2 — módulos 3–4 do curso (aulas 10+)
+## Aulas
 
-- [x] 10 Filtro e corte — apagar do estado (`RemoveMessage`), filtrar só no
-      `invoke`, cortar por tokens (`trim_messages`: system, `start_on`, parcial)
-- [x] 11 Streaming — `stream` preguiçoso, modos `updates`/`values`/`messages`,
-      `astream`, `astream_events` filtrado por nó
-- [x] 12 Breakpoints — `interrupt_before`/`after`, `__interrupt__`,
-      `get_state().next`, retomada com `stream(None, cfg)`
-- [x] 13 Feedback humano — `update_state` (mesmo `id` corrige, sem `id` anexa),
-      `as_node` + nó placeholder, correção de pedido parado
-- [x] 14 Breakpoints dinâmicos — `raise NodeInterrupt` por regra (depreciado),
-      `interrupt()` + `Command(resume=)`, motivo em `tasks[].interrupts`
-- [x] 15 Viagem no tempo — `get_state_history` (novo→antigo), replay com config
-      antiga, fork com `update_state` (mesmo `id` substitui, novo anexa)
-- [x] 16 Paralelização — fan-out simétrico (join 1x) vs desigual (1x por chegada),
-      `sorting_reducer`, RAG paralelo (2 fontes + síntese)
-- [x] 17 Sub-grafos — filho lê filtrado e devolve eco completo, eco duplo quebra,
-      reducer duplica, `output_schema` é cirúrgico
-- [x] 18 Observabilidade — `BaseCallbackHandler` local (árvore + tempos + erros),
-      LangSmith opcional (mesmo protocolo, 3 envs), trace vs checkpoints
-- [x] 19 MapReduce — `Send` dinâmico (`langgraph.types`), sub-estado por `Send`,
-      reduce por `add` + reduce final, `with_structured_output`, guarda p/ N=0
+| # | Aula | Resenha | Abrir no Colab |
+|---|---|---|---|
+| 00 | Visão Geral | O mapa do curso: o que é um grafo, por que um `if/else` não basta quando entra IA, e a diferença entre uma corrente reta e um fluxograma com voltas. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) |
+| 01 | Setup | Preparar o ambiente (instalador `uv`, chave do Groq guardada com segurança) e fazer a primeira pergunta ao modelo, entendendo resposta pronta vs resposta pingando. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) |
+| 02 | Grafos | Montar e rodar seu primeiro fluxograma: etapas, bifurcações e o que acontece quando dois caminhos escrevem no mesmo lugar. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) |
+| 03 | Cadeias | Transformar conversa em lista de mensagens e ensinar o modelo a *pedir* uma ferramenta (sem executar ainda). | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) |
+| 04 | Roteadores | Colocar um "porteiro" que decide: executa a ferramenta ou encerra — e ver o primeiro cálculo real acontecer. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) |
+| 05 | Agente ReAct | Fechar o ciclo: o modelo lê o resultado, pede mais ferramentas e só para quando termina — o coração de todo agente. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) |
+| 06 | Memória | Fazer o agente lembrar entre mensagens (como sessão de site), com conversas separadas por cliente. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) |
+| 07 | Schemas | Contratos para os dados do grafo: do rascunho que aceita tudo ao validador que barra valor inválido. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb) |
+| 08 | Reducers | Regras de mesclagem quando duas etapas escrevem juntas, e os três poderes de manipular o histórico. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/08_reducers.ipynb) |
+| 09 | Schemas Múltiplos | Esconder o interior: o grafo recebe pouco, usa segredos por dentro e devolve só o essencial. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/09_schemas_multiplos.ipynb) |
+| 10 | Filtro e corte | Impedir que conversas longas estourem o custo: apagar, recortar ou podar o histórico por orçamento. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/10_filtro_corte.ipynb) |
+| 11 | Streaming | Ver o agente trabalhando ao vivo (por etapa, foto atual ou pingos de resposta) em vez de esperar o final. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/11_streaming_hitl.ipynb) |
+| 12 | Breakpoints | Pausar o agente antes de executar para um humano aprovar — e retomar de onde parou. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/12_breakpoints.ipynb) |
+| 13 | Feedback humano | Deixar o humano corrigir e reescrever o que está parado, assinando a intervenção. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/13_feedback_humano.ipynb) |
+| 14 | Breakpoints dinâmicos | Pausar por regra (ex: só conta alta) em vez de pausar tudo, com a API nova de pergunta-e-resposta. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/14_breakpoints_dinamicos.ipynb) |
+| 15 | Viagem no tempo | Rebobinar a execução: rever o passado, repetir cenas e testar futuros alternativos. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/15_viagem_tempo.ipynb) |
+| 16 | Paralelização | Rodar ramos juntos (cozinha e bar) e juntar os resultados, inclusive buscando em duas fontes ao mesmo tempo. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/16_paralelizacao.ipynb) |
+| 17 | Sub-grafos | Quebrar o grafo em equipes (grafos dentro de grafos) com interfaces que não vazam segredo. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/17_subgrafos.ipynb) |
+| 18 | Observabilidade | Enxergar quem chamou quem, quanto tempo levou e onde quebrou — localmente ou na nuvem. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/18_langsmith.ipynb) |
+| 19 | MapReduce | Quando o número de tarefas só se conhece executando: espalhar N trabalhos e juntar no final. Fecha o curso. | [abrir](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/19_mapreduce.ipynb) |
 
-Mapeia `Curso_Introdutorio_de_Langgraph/module-1` e `modulo-2`.
-
-> Nota de limpeza: os notebooks mínimos 02–04 da primeira tentativa foram
-> removidos (confundiam). Os `src/aula02-04.py` foram mantidos como espelhos
-> executáveis e serão expandidos quando as aulas forem refeitas no novo padrão.
+> Nota: o repo no GitHub é privado — os links acima abrem para o dono logado com a integração GitHub do Colab; para terceiros dariam 404.
 
 ## Uso rápido
 
@@ -72,7 +44,7 @@ pip install -r requirements.txt
 # ou com uv (recomendado): uv venv && uv sync
 python src/aula00_visao_geral.py   # sem LLM, 100% offline
 python src/aula01_setup.py         # Groq real com GROQ_API_KEY, senão Fake
-python -m pytest tests/ -q         # testes offline (+1 só com chave real)
+python -m pytest tests/ -q         # 116 testes (offline + Groq real)
 jupyter notebook notebooks/00_visao_geral.ipynb
 ```
 
@@ -84,77 +56,30 @@ cp .env.example .env  # preencher GROQ_API_KEY
 
 ## No Colab (upload manual, um arquivo por vez)
 
-O repo no GitHub é **privado**, então `git clone https://...` pede usuário/senha
-e não funciona nas células do Colab. O fluxo oficial é upload manual:
+O repo no GitHub é **privado**, então `git clone https://...` pede usuário/senha e não funciona nas células do Colab. O fluxo oficial é upload manual (ou abrir pelos links da tabela acima):
 
-1. Baixe o `.ipynb` da aula (página do arquivo no GitHub → `Raw` → salvar, ou
-   `git pull` local + upload pelo painel de arquivos do Colab).
-2. Faça upload no Colab (`Arquivo → Fazer upload de notebook`, ou arraste para
-   o painel de arquivos).
-3. **Rode a CÉLULA 0 primeiro** — todo notebook (01, 02 e os próximos) começa com
-   ela: `%pip install -q ...` porque o Colab vem sem esses pacotes. Localmente,
-   com `uv sync` feito, ela é inofensivo (no-op).
-4. Cole a `GROQ_API_KEY` quando a célula pedir (digitação oculta, nada é salvo).
-   Da Aula 03 em diante, todo notebook que usa Groq tem **célula de chave
-   dedicada** (CÉLULA 1): sem chave ele segue no Fake offline.
-5. Quando sair versão nova da aula: baixe de novo e repita (ou *Desconectar e
-   descartar edições* antes, para nunca trabalhar em cima de versão velha).
+1. Baixe o `.ipynb` da aula (página do arquivo no GitHub → `Raw` → salvar), ou abra direto pelo link "abrir" da tabela.
+2. Faça upload no Colab (`Arquivo → Fazer upload de notebook`, ou arraste para o painel de arquivos).
+3. **Rode a CÉLULA 0 primeiro** — todo notebook começa com ela: `%pip install -q ...` porque o Colab vem sem esses pacotes. Localmente, com `uv sync` feito, ela é inofensiva (no-op).
+4. Cole a `GROQ_API_KEY` quando a célula pedir (digitação oculta, nada é salvo). Da Aula 03 em diante, todo notebook que usa Groq tem **célula de chave dedicada** (CÉLULA 1): sem chave ele segue no Fake offline.
+5. Quando sair versão nova da aula: baixe de novo e repita (ou *Desconectar e descartar edições* antes, para nunca trabalhar em cima de versão velha).
 
-> Nota: os badges "Abrir no Colab" no topo funcionam para o dono do repo logado
-> com a integração GitHub do Colab; para terceiros dariam 404 enquanto o repo
-> for privado.
-
-Por que `get_llm` cai no Fake se o pacote faltar: sem isso, adicionar a chave
-num Colab recém-criado estourava `ModuleNotFoundError` no meio da aula. Agora
-ele avisa o comando de instalação e continua em modo offline.
+Por que `get_llm` cai no Fake se o pacote faltar: sem isso, adicionar a chave num Colab recém-criado estourava `ModuleNotFoundError` no meio da aula. Agora ele avisa o comando de instalação e continua em modo offline.
 
 ## Estrutura
 
 ```
-src/aula00_visao_geral.py   # lanchonete clássica + mesmo fluxo em StateGraph
-src/aula01_setup.py         # get_llm() Groq-ou-Fake (tolera falta do pacote) + invoke/stream
-src/aula02_grafo.py         # grafo de 3 nós + demos: overwrite, rota inexistente, chave fora do schema
-notebooks/00_visao_geral.ipynb  # 11 células: analogia, 3 codes, dissecção, erros, desafio
-notebooks/01_setup.ipynb        # 17 células: célula pip, uv vs pip, chave, raciocínio, stream, diagnóstico
-notebooks/02_grafos.ipynb       # 30 células: célula pip, analogia, minimal, dissecção, 7 variações, exercício, desafio
-src/aula03_cadeias.py         # cardápio [multiply, soma] + demos de overwrite/MessagesState
-notebooks/03_cadeias.ipynb      # 20 células: célula pip, célula de chave, 4 mensagens, bind_tools, overwrite, MessagesState
-src/aula04_roteador.py        # porteiro + caixa [multiply, soma] + demos de falha
-notebooks/04_roteadores.ipynb   # 20 células: tools_condition, ToolNode, ToolMessage, 3 falhas, exercício, desafio
-src/aula05_agente.py          # ReAct [add, multiply, divide] + demos sem-volta e limite de recursão
-notebooks/05_agente_react.ipynb # 20 células: a volta, ciclo, traço real, trava, SYS, exercício, desafio
-src/aula06_memoria.py         # ReAct + demos transitorio/memória/isolamento/sem-thread
-notebooks/06_memoria.ipynb      # 20 células: sessão, prova do esquecimento, reidratação, raio-X, exercício, desafio
-src/aula07_schemas.py         # mesmo grafo em TD/DC/PY + demos do bravo
-notebooks/07_schemas.ipynb      # 19 células: 3 contratos, acesso, bravo, extra, normalizador, exercício, desafio
-src/aula08_reducers.py        # overwrite, fan-out, operator.add, custom, add_messages, estendido
-notebooks/08_reducers.ipynb     # 18 células: célula pip, quebra, [1,2,3,3], None, 3 poderes, exercício, desafio
-src/aula09_schemas_multiplos.py # privado (baz) + in/out (notas) + sem-filtro
-notebooks/09_schemas_multiplos.ipynb # 18 células: privado, in/out, contraste, KeyError, injeção, avaliador, fechamento
-src/aula10_filtro_corte.py      # apagar, filtrar, trim, start_on, parcial, filter por tipo
-notebooks/10_filtro_corte.ipynb   # 19 células: comanda, 3 táticas, system/start_on/parcial, exercício, desafio
-src/aula11_streaming.py       # ReAct + demos updates/values/messages/tokens reais
-notebooks/11_streaming_hitl.ipynb # 21 células: rastreio, 3 modos, gerador, async, filtro por nó, desafio
-src/aula12_breakpoints.py      # fiscal: pausa/inspeciona/retoma + sem-sessão + after
-notebooks/12_breakpoints.ipynb  # 18 células: fiscal, pausa, carimbo, sem-sessão, after, exercício, desafio
-src/aula13_feedback.py        # corrige pedido, anexa contexto, feedback assinado, as_node fantasma
-notebooks/13_feedback_humano.ipynb # 18 células: caneta vermelha, correção, anexo, as_node, placeholder, exercício, desafio
-src/aula14_dinamico.py        # régua (NodeInterrupt), trava, desconto, API nova com Command
-notebooks/14_breakpoints_dinamicos.ipynb # 17 células: régua, motivo, trava, API nova, estático, exercício, desafio
-src/aula15_tempo.py           # navega, reproduz, bifurca (Fake determinístico)
-notebooks/15_viagem_tempo.ipynb   # 17 células: fita, replay, fork, id novo, auditoria, desafio
-src/aula16_paralelo.py        # simétrico 1x, desigual 2x, sorting, RAG paralelo
-notebooks/16_paralelizacao.ipynb  # 17 células: fan-out/in, 2x, sorting, RAG, exercício, desafio
-src/aula17_subgrafos.py       # eco duplo quebra, reducer duplica, output_schema limpo
-notebooks/17_subgrafos.ipynb    # 16 células: eco, quebra, dissecção, reducer, output_schema, exercício, desafio
-src/aula18_observa.py         # RastreadorLocal (árvore+tempos+erros) + LangSmith opcional
-notebooks/18_langsmith.ipynb    # 16 células: protocolo, erro que sobe, LangSmith, trace+histórico, exercício, desafio
-src/aula19_mapreduce.py       # map dinâmico + reduce + structured (Groq) / tabela (Fake)
-notebooks/19_mapreduce.ipynb    # 17 células: Send, N dinâmico, structured, N=0, exercício redação, fechamento do curso
-tests/test_aula00.py ...    # offline, determinístico
+AGENTS.md                 # regras do projeto (modelo, padrão de aula, git, Colab)
+src/aulaNN_*.py           # espelho executável de cada aula (python src/...)
+notebooks/NN_*.ipynb      # 1 notebook autocontido por aula (CÉLULA 0 instala tudo)
+tests/test_aulaNN.py      # testes offline e determinísticos (+ Groq real marcado)
 ```
 
-## Comportamentos verificados na Aula 02 (LangGraph 1.2.x)
+## Comportamentos verificados (clique para expandir)
+
+Cada tabela abaixo foi executada de verdade no ambiente indicado — não é documentação copiada, é comportamento medido.
+
+<details><summary>Aula 02 — Grafos (LangGraph 1.2.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -167,7 +92,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | `Literal` no retorno do roteador | é **só hint** — `str` simples funciona |
 | `draw_ascii()` | exige `grandalf` (não instalado); `draw_mermaid()` sempre funciona |
 
-## Comportamentos verificados na Aula 04 (LangGraph 1.2.x, Groq gpt-oss-20b)
+</details>
+
+<details><summary>Aula 04 — Roteadores (LangGraph 1.2.x, Groq gpt-oss-20b)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -178,7 +105,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | exceção **dentro** da tool (`1/0`) | **propaga** (`ZeroDivisionError` mata o `invoke`) |
 | dois `tool_calls` juntos | dois `ToolMessage`, cada um com seu `id` |
 
-## Comportamentos verificados na Aula 05 (LangGraph 1.2.x, Groq gpt-oss-20b)
+</details>
+
+<details><summary>Aula 05 — Agente ReAct (LangGraph 1.2.x, Groq gpt-oss-20b)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -187,7 +116,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | `recursion_limit` estourado | `GraphRecursionError: Recursion limit of N reached...` (padrão: 25) |
 | `SystemMessage` só na chamada | não polui o estado; gravado no estado, viaja no histórico |
 
-## Comportamentos verificados na Aula 06 (LangGraph 1.2.x, Groq gpt-oss-20b)
+</details>
+
+<details><summary>Aula 06 — Memória (LangGraph 1.2.x, Groq gpt-oss-20b)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -198,7 +129,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | `get_state_history` | um checkpoint por passo (10 na conversa de 2 turnos) |
 | `MemorySaver` | RAM: morre com o processo (produção: SQLite/Postgres) |
 
-## Comportamentos verificados na Aula 07 (LangGraph + Pydantic v2)
+</details>
+
+<details><summary>Aula 07 — Schemas (LangGraph + Pydantic v2)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -208,7 +141,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | nó em grafo DC/PY | recebe a **instância** (`state.name`); resultado do `invoke` é **dict** |
 | chave extra no Pydantic | **ignorada** por padrão (sem erro) |
 
-## Comportamentos verificados na Aula 08 (LangGraph 1.2.x)
+</details>
+
+<details><summary>Aula 08 — Reducers (LangGraph 1.2.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -218,7 +153,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | reducer custom | tolera `None`, limita, mescla "à sua maneira" |
 | `add_messages` por `id` igual | **substitui** em vez de anexar; `RemoveMessage(id)` apaga |
 
-## Comportamentos verificados na Aula 09 (LangGraph 1.2.x)
+</details>
+
+<details><summary>Aula 09 — Schemas Múltiplos (LangGraph 1.2.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -228,7 +165,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | nó lendo fora do próprio schema | `KeyError` (cada nó enxerga só o declarado) |
 | `input=`/`output=` (nomes do curso) | funcionam, mas emitem `LangGraphDeprecatedSinceV05` (usar `input_schema=`) |
 
-## Comportamentos verificados na Aula 10 (langchain-core 1.6.x)
+</details>
+
+<details><summary>Aula 10 — Filtro e corte (langchain-core 1.6.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -239,7 +178,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | `allow_partial=True` | salva o **fim** da longa (por linhas); de 1 linha só, cai inteira |
 | `token_counter=len` | conta **mensagens**, não tokens — usar tiktoken/contador do modelo |
 
-## Comportamentos verificados na Aula 11 (LangGraph 1.2.x)
+</details>
+
+<details><summary>Aula 11 — Streaming (LangGraph 1.2.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -248,7 +189,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | `asyncio.run()` no notebook | `RuntimeError` (kernel já tem loop); usar `await` direto, `asyncio.run` só em `.py` |
 | Fake criado dentro do nó com loop | cada volta zera a sequência → loop infinito (construir fora, reusar dentro) |
 
-## Comportamentos verificados na Aula 12 (LangGraph 1.2.x)
+</details>
+
+<details><summary>Aula 12 — Breakpoints (LangGraph 1.2.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -258,7 +201,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | `interrupt_after=["assistant"]` | pausa depois do nó; aqui para no mesmo ponto |
 | Fake reusado entre grafos | sequência embaralhada (um Fake fresco por grafo) |
 
-## Comportamentos verificados na Aula 13 (LangGraph 1.2.x)
+</details>
+
+<details><summary>Aula 13 — Feedback humano (LangGraph 1.2.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -267,7 +212,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | `as_node` com nome inexistente | `InvalidUpdateError: Node ... does not exist` |
 | placeholder + `as_node` | pausa antes dele; edição entra assinada; fluxo segue normal |
 
-## Comportamentos verificados na Aula 14 (LangGraph 1.2.x)
+</details>
+
+<details><summary>Aula 14 — Breakpoints dinâmicos (LangGraph 1.2.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -276,7 +223,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | `interrupt(motivo)` + `Command(resume=R)` | a chamada devolve `R` na retomada (humano responde no fluxo) |
 | estático vs régua em conta baixa | lista fixa pausa à toa; régua deixa passar |
 
-## Comportamentos verificados na Aula 15 (LangGraph 1.2.x)
+</details>
+
+<details><summary>Aula 15 — Viagem no tempo (LangGraph 1.2.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -285,7 +234,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | fork com mesmo `id` | substitui a mensagem; com id novo, anexa (duplica) |
 | após `update_state` no passado | nada executa até `stream(None, fork_config)`; `get_state` mostra o ramo novo |
 
-## Comportamentos verificados na Aula 16 (LangGraph 1.2.x)
+</details>
+
+<details><summary>Aula 16 — Paralelização (LangGraph 1.2.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -294,7 +245,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | `sorting_reducer` | mesma saída ordenada nas 3 execuções (fim da loteria) |
 | RAG paralelo | 2 fontes juntas + 1 síntese (Groq real cita valores; Fake conta fontes) |
 
-## Comportamentos verificados na Aula 17 (LangGraph 1.2.x)
+</details>
+
+<details><summary>Aula 17 — Sub-grafos (LangGraph 1.2.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -303,7 +256,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | reducer na chave comum | evita o crash, mas o eco duplica (`'pastelpastelpastel'`) |
 | `output_schema` no filho | só as chaves declaradas voltam; privado não vaza; `pedido` intacto |
 
-## Comportamentos verificados na Aula 18 (langchain-core 1.6.x)
+</details>
+
+<details><summary>Aula 18 — Observabilidade (langchain-core 1.6.x)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -312,7 +267,9 @@ tests/test_aula00.py ...    # offline, determinístico
 | erro no filho | `on_chain_error` em cada nível até o pai; `stream` propaga a exceção |
 | LangSmith sem chave | nada a fazer; com `LANGCHAIN_TRACING_V2=true` + chave, mesmo código traça |
 
-## Comportamentos verificados na Aula 19 (LangGraph 1.2.x, Groq gpt-oss-20b)
+</details>
+
+<details><summary>Aula 19 — MapReduce (LangGraph 1.2.x, Groq gpt-oss-20b)</summary>
 
 | Situação | O que realmente acontece |
 |---|---|
@@ -320,6 +277,8 @@ tests/test_aula00.py ...    # offline, determinístico
 | `langgraph.constants.Send` | funciona, mas emite `LangGraphDeprecatedSinceV10` (usar `langgraph.types`) |
 | `with_structured_output(Pydantic)` | objeto tipado (`item`, `nota: int` validado) |
 | reduce final com N=0 | `IndexError` sem guarda — todo `elege` precisa de fallback |
+
+</details>
 
 ## O que a Aula 00 ensina
 
