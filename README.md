@@ -8,6 +8,15 @@ Cada aula é um notebook independente que você abre no Colab e executa célula 
 
 Ao final das 20 aulas você saberá montar um agente completo: que entende pedidos fora de ordem, usa ferramentas, lembra entre mensagens, pede aprovação quando precisa e organiza tarefas paralelas — a base para aplicar no seu próprio projeto (como um avaliador automático de redações).
 
+Este reforço foi baseado no curso da **Scoras Academy**, do professor **Anderson Amaral** — os temas seguem a trilha original; todos os exemplos, textos e códigos aqui são próprios. Ficam os devidos créditos:
+
+Professor Anderson Amaral
+LinkedIn: https://www.linkedin.com/in/andersonlamaral
+
+Scoras Academy
+Site: https://scorasacademy.com.br
+GitHub (Somente para Alunos): https://github.com/Scoras-Academy
+
 Padrão técnico: Groq como LLM primário (`GROQ_API_KEY` via `.env`, nunca versionado), modelo `openai/gpt-oss-20b` sempre com `reasoning_effort="low"`. Sem chave, tudo roda **offline** com Fake determinístico. Regras do projeto em [`AGENTS.md`](AGENTS.md).
 
 ## Aulas
