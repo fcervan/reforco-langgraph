@@ -3,7 +3,7 @@
 Na Aula 12 o humano só carimbava (retomava ou não). Aqui ele EDITA:
 - `update_state(cfg, {...})` sem `id` -> ANEXA (novo contexto);
 - com o MESMO `id` -> SOBRESCREVE (corrige o pedido pendente);
-- `as_node="feedback_humano"` -> assina a edição com nome de nó (exige que
+- `as_node="revisao_humana"` -> assina a edição com nome de nó (exige que
   o nó placeholder exista no grafo, senão InvalidUpdateError).
 
 Execute: python src/aula13_feedback.py
@@ -85,9 +85,9 @@ def build_base(llm=None, com_feedback: bool = False):
     builder.add_node("assistant", make_assistant(llm))
     builder.add_node("tools", ToolNode(TOOLS))
     if com_feedback:
-        builder.add_node("feedback_humano", lambda state: {})
-        builder.add_edge(START, "feedback_humano")
-        builder.add_edge("feedback_humano", "assistant")
+        builder.add_node("revisao_humana", lambda state: {})
+        builder.add_edge(START, "revisao_humana")
+        builder.add_edge("revisao_humana", "assistant")
     else:
         builder.add_edge(START, "assistant")
     builder.add_conditional_edges("assistant", tools_condition)
@@ -135,24 +135,24 @@ def demo_anexa_contexto() -> None:
 
 
 def demo_feedback_assinado() -> None:
-    """Placeholder + as_node: a edição entra assinada como 'feedback_humano'."""
+    """Placeholder + as_node: a edição entra assinada como 'revisao_humana'."""
     builder = StateGraph(MessagesState)
     llm = fake_pedido_soma()
     builder.add_node("assistant", make_assistant(llm))
     builder.add_node("tools", ToolNode(TOOLS))
-    builder.add_node("feedback_humano", lambda state: {})
-    builder.add_edge(START, "feedback_humano")
-    builder.add_edge("feedback_humano", "assistant")
+    builder.add_node("revisao_humana", lambda state: {})
+    builder.add_edge(START, "revisao_humana")
+    builder.add_edge("revisao_humana", "assistant")
     builder.add_conditional_edges("assistant", tools_condition)
     builder.add_edge("tools", "assistant")
-    graph = builder.compile(checkpointer=MemorySaver(), interrupt_before=["feedback_humano"])
+    graph = builder.compile(checkpointer=MemorySaver(), interrupt_before=["revisao_humana"])
     cfg = {"configurable": {"thread_id": "assinado"}}
     list(graph.stream({"messages": [HumanMessage(content="Some 3 e 4")]}, cfg))
     print("pausado em:", graph.get_state(cfg).next)
     graph.update_state(
         cfg,
         {"messages": [HumanMessage(content="na verdade quero o dobro: some 7 e 7")]},
-        as_node="feedback_humano",
+        as_node="revisao_humana",
     )
     list(graph.stream(None, cfg))
     msgs = graph.get_state(cfg).values["messages"]

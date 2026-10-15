@@ -58,7 +58,7 @@ def demo_navega() -> list:
     """Roda uma vez e lista os checkpoints (do mais novo ao mais antigo)."""
     graph = build_graph()
     cfg = {"configurable": {"thread_id": "viagem"}}
-    list(graph.stream({"messages": [HumanMessage(content="Multiplique 2 e 3", id="hum-1")]}, cfg))
+    list(graph.stream({"messages": [HumanMessage(content="Some 2 e 3", id="hum-1")]}, cfg))
     historico = list(graph.get_state_history(cfg))
     print(f"{len(historico)} checkpoints (mais novo primeiro):")
     for h in historico:
@@ -81,7 +81,7 @@ def demo_bifurca(graph, cfg, historico):
     antigo = historico[-2]
     fork_cfg = graph.update_state(
         antigo.config,
-        {"messages": [HumanMessage(content="Multiplique 5 e 3", id="hum-1")]},
+        {"messages": [HumanMessage(content="Some 5 e 3", id="hum-1")]},
     )
     print("novo checkpoint (fork) criado.")
     for chunk in graph.stream(None, fork_cfg, stream_mode="updates"):

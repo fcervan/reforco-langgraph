@@ -34,6 +34,11 @@ correção futura. Em caso de conflito com o `AGENTS.md` da raiz, vale este aqui
   no ambiente (versão do LangGraph registrada no README).
 - Sem outputs versionados: notebooks commitados **limpos** (`outputs: []`,
   `execution_count: null`). Nunca commitar output de execução do Colab.
+- **Originalidade dos exemplos**: só os TEMAS vêm do curso original (assunto
+  público). Nomes, valores e frases de exemplo são sempre próprios, no universo
+  lanchonete/avaliador (ex: `no_suco`, `humor="confuso"`, `mesa=12`) — nunca
+  reutilizar `graph_state`, `decide_mood`, `Zé`/`feliz`/`bravo`, `foo`/`baz`,
+  `tool_calling_llm`, `feedback_humano` ou frases-exemplo dos notebooks originais.
 
 ## Código e testes
 

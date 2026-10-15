@@ -49,17 +49,17 @@ def test_placeholder_permite_as_node():
     builder = StateGraph(MessagesState)
     builder.add_node("assistant", make_assistant(llm=fake_pedido_soma()))
     builder.add_node("tools", ToolNode(TOOLS))
-    builder.add_node("feedback_humano", lambda state: {})
-    builder.add_edge(START, "feedback_humano")
-    builder.add_edge("feedback_humano", "assistant")
+    builder.add_node("revisao_humana", lambda state: {})
+    builder.add_edge(START, "revisao_humana")
+    builder.add_edge("revisao_humana", "assistant")
     builder.add_conditional_edges("assistant", tools_condition)
     builder.add_edge("tools", "assistant")
-    graph = builder.compile(checkpointer=MemorySaver(), interrupt_before=["feedback_humano"])
+    graph = builder.compile(checkpointer=MemorySaver(), interrupt_before=["revisao_humana"])
     cfg = {"configurable": {"thread_id": "t4"}}
     list(graph.stream({"messages": [HumanMessage(content="Some 3 e 4")]}, cfg))
-    assert graph.get_state(cfg).next == ("feedback_humano",)
+    assert graph.get_state(cfg).next == ("revisao_humana",)
     graph.update_state(
-        cfg, {"messages": [HumanMessage(content="dobra isso")]}, as_node="feedback_humano"
+        cfg, {"messages": [HumanMessage(content="dobra isso")]}, as_node="revisao_humana"
     )
     list(graph.stream(None, cfg))
     msgs = graph.get_state(cfg).values["messages"]

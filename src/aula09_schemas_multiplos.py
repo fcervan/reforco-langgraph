@@ -3,9 +3,9 @@
 Dois mecanismos que desacoplam o que ENTRA/SAI do que CIRCULA:
 1. Estado PRIVADO: um nó escreve num schema que não é o geral
    (anotação de retorno); o valor viaja entre nós mas some da saída.
-2. input_schema/output_schema: o grafo recebe só `pergunta`, usa `notas`
-   por dentro e devolve só `resposta` (nomes novos; `input=`/`output=` do
-   curso estão depreciados desde a v0.5).
+2. input_schema/output_schema: o grafo recebe só `pedido`, usa `comanda`
+   por dentro e devolve só `conta` (nomes novos; `input=`/`output=`
+   emitem aviso de depreciação desde a v0.5).
 
 Sem LLM nesta aula (100% offline). Execute: python src/aula09_schemas_multiplos.py
 """
@@ -18,96 +18,96 @@ from langgraph.graph import END, START, StateGraph
 warnings.filterwarnings("ignore")  # cala avisos de API antiga nas demos
 
 
-class EstadoGeral(TypedDict):
-    foo: int
+class ContaGeral(TypedDict):
+    subtotal: int
 
 
-class EstadoPrivado(TypedDict):
-    baz: int
+class TaxaPrivada(TypedDict):
+    acrescimo: int
 
 
-class Entrada(TypedDict):
-    pergunta: str
+class PedidoEntrada(TypedDict):
+    pedido: str
 
 
-class Saida(TypedDict):
-    resposta: str
+class ContaSaida(TypedDict):
+    conta: str
 
 
-class EstadoCompleto(TypedDict):
-    pergunta: str
-    resposta: str
-    notas: str
+class ContaCompleta(TypedDict):
+    pedido: str
+    conta: str
+    comanda: str
 
 
 def build_privado():
-    def no_1(estado: EstadoGeral) -> EstadoPrivado:
-        return {"baz": estado["foo"] * 10}  # escreve no PRIVADO
+    def calcula_taxa(estado: ContaGeral) -> TaxaPrivada:
+        return {"acrescimo": estado["subtotal"] // 10}  # escreve no PRIVADO
 
-    def no_2(estado: EstadoPrivado) -> EstadoGeral:
-        return {"foo": estado["baz"] + 1}  # lê o privado, devolve geral
+    def fecha_conta(estado: TaxaPrivada) -> ContaGeral:
+        return {"subtotal": estado["acrescimo"] * 11}  # lê o privado, devolve geral
 
-    builder = StateGraph(EstadoGeral)
-    builder.add_node("no_1", no_1)
-    builder.add_node("no_2", no_2)
-    builder.add_edge(START, "no_1")
-    builder.add_edge("no_1", "no_2")
-    builder.add_edge("no_2", END)
+    builder = StateGraph(ContaGeral)
+    builder.add_node("calcula_taxa", calcula_taxa)
+    builder.add_node("fecha_conta", fecha_conta)
+    builder.add_edge(START, "calcula_taxa")
+    builder.add_edge("calcula_taxa", "fecha_conta")
+    builder.add_edge("fecha_conta", END)
     return builder.compile()
 
 
 def build_in_out():
-    def pensa(estado: EstadoCompleto) -> dict:
-        return {"resposta": "tchau", "notas": "nome=Anderson"}
+    def anota(estado: ContaCompleta) -> dict:
+        return {"conta": "R$ 14", "comanda": "mesa=12"}
 
-    def responde(estado: EstadoCompleto) -> dict:
-        return {"resposta": estado["resposta"] + "!"}
+    def finaliza(estado: ContaCompleta) -> dict:
+        return {"conta": estado["conta"] + " (fechada)"}
 
-    builder = StateGraph(EstadoCompleto, input_schema=Entrada, output_schema=Saida)
-    builder.add_node("pensa", pensa)
-    builder.add_node("responde", responde)
-    builder.add_edge(START, "pensa")
-    builder.add_edge("pensa", "responde")
-    builder.add_edge("responde", END)
+    builder = StateGraph(ContaCompleta, input_schema=PedidoEntrada, output_schema=ContaSaida)
+    builder.add_node("anota", anota)
+    builder.add_node("finaliza", finaliza)
+    builder.add_edge(START, "anota")
+    builder.add_edge("anota", "finaliza")
+    builder.add_edge("finaliza", END)
     return builder.compile()
 
 
 def build_sem_filtro():
     """Mesmo grafo SEM input/output: tudo vaza na saída (contraste)."""
 
-    def pensa(estado: EstadoCompleto) -> dict:
-        return {"resposta": "tchau", "notas": "nome=Anderson"}
+    def anota(estado: ContaCompleta) -> dict:
+        return {"conta": "R$ 14", "comanda": "mesa=12"}
 
-    def responde(estado: EstadoCompleto) -> dict:
-        return {"resposta": estado["resposta"] + "!"}
+    def finaliza(estado: ContaCompleta) -> dict:
+        return {"conta": estado["conta"] + " (fechada)"}
 
-    builder = StateGraph(EstadoCompleto)
-    builder.add_node("pensa", pensa)
-    builder.add_node("responde", responde)
-    builder.add_edge(START, "pensa")
-    builder.add_edge("pensa", "responde")
-    builder.add_edge("responde", END)
+    builder = StateGraph(ContaCompleta)
+    builder.add_node("anota", anota)
+    builder.add_node("finaliza", finaliza)
+    builder.add_edge(START, "anota")
+    builder.add_edge("anota", "finaliza")
+    builder.add_edge("finaliza", END)
     return builder.compile()
 
 
 def demo_privado() -> None:
     graph = build_privado()
-    print("stream (baz existe NO MEIO):")
-    for passo in graph.stream({"foo": 1}):
+    print("stream (acrescimo existe NO MEIO):")
+    for passo in graph.stream({"subtotal": 100}):
         print("  ", passo)
-    out = graph.invoke({"foo": 1})
-    print("invoke (saída final):", out, "| 'baz' vazou?", "baz" in out)
+    out = graph.invoke({"subtotal": 100})
+    print("invoke (saída final):", out, "| 'acrescimo' vazou?", "acrescimo" in out)
 
 
 def demo_in_out() -> None:
-    print("sem filtro :", build_sem_filtro().invoke({"pergunta": "oi"}))
-    print("com filtro :", build_in_out().invoke({"pergunta": "oi"}))
+    print("sem filtro :", build_sem_filtro().invoke({"pedido": "2 pastéis"}))
+    print("com filtro :", build_in_out().invoke({"pedido": "2 pastéis"}))
 
 
 def main() -> None:
-    print("=== 1. estado privado (baz viaja, não sai) ===")
+    print("=== 1. estado privado (acrescimo viaja, não sai) ===")
     demo_privado()
-    print("\n=== 2. input/output schemas (notas escondidas) ===")
+    print("\n=== 2. input/output schemas (comanda escondida) ===")
     demo_in_out()
 
 

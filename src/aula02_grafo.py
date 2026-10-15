@@ -4,7 +4,7 @@ Ideia: estado é um dict compartilhado. Cada nó recebe o estado
 e devolve um dict PARCIAL. Por padrão, a chave é SOBRESCRITA
 (o último nó a escrever ganha).
 
-Grafo: START -> node_1 -> decide_mood -> node_2 | node_3 -> END
+Grafo: START -> no_recebe -> decide_bebida -> no_suco | no_agua -> END
 
 Execute: python src/aula02_grafo.py
 """
@@ -16,35 +16,35 @@ from langgraph.graph import END, START, StateGraph
 
 
 class State(TypedDict):
-    graph_state: str
+    pedido: str
 
 
-def node_1(state: State) -> dict:
-    return {"graph_state": state["graph_state"] + " Eu estou "}
+def no_recebe(state: State) -> dict:
+    return {"pedido": state["pedido"] + "hamburguer"}
 
 
-def node_2(state: State) -> dict:
-    return {"graph_state": state["graph_state"] + "cansado!"}
+def no_suco(state: State) -> dict:
+    return {"pedido": state["pedido"] + " + suco"}
 
 
-def node_3(state: State) -> dict:
-    return {"graph_state": state["graph_state"] + "descansado!"}
+def no_agua(state: State) -> dict:
+    return {"pedido": state["pedido"] + " + água"}
 
 
-def decide_mood(state: State) -> Literal["node_2", "node_3"]:
-    # 50/50 como no curso. Com random.seed(N) antes do invoke, fica determinístico.
-    return "node_2" if random.random() < 0.5 else "node_3"
+def decide_bebida(state: State) -> Literal["no_suco", "no_agua"]:
+    # 50/50. Com random.seed(N) antes do invoke, fica determinístico.
+    return "no_suco" if random.random() < 0.5 else "no_agua"
 
 
 def build_graph() -> StateGraph:
     builder = StateGraph(State)
-    builder.add_node("node_1", node_1)
-    builder.add_node("node_2", node_2)
-    builder.add_node("node_3", node_3)
-    builder.add_edge(START, "node_1")
-    builder.add_conditional_edges("node_1", decide_mood)
-    builder.add_edge("node_2", END)
-    builder.add_edge("node_3", END)
+    builder.add_node("no_recebe", no_recebe)
+    builder.add_node("no_suco", no_suco)
+    builder.add_node("no_agua", no_agua)
+    builder.add_edge(START, "no_recebe")
+    builder.add_conditional_edges("no_recebe", decide_bebida)
+    builder.add_edge("no_suco", END)
+    builder.add_edge("no_agua", END)
     return builder.compile()
 
 
@@ -52,7 +52,7 @@ def mostrar_trajeto(graph, entrada: str, seed: int | None = None) -> str:
     """Roda o grafo e devolve o caminho percorrido (útil para estudo)."""
     if seed is not None:
         random.seed(seed)
-    return graph.invoke({"graph_state": entrada})["graph_state"]
+    return graph.invoke({"pedido": entrada})["pedido"]
 
 
 # ---------------------------------------------------------------- demos
@@ -73,10 +73,10 @@ def demo_overwrite() -> None:
     """Dois nós escrevem a MESMA chave em sequencia -> o ultimo ganha (sem erro)."""
 
     def no_a(state: State) -> dict:
-        return {"graph_state": "escrito por A"}
+        return {"pedido": "escrito por A"}
 
     def no_b(state: State) -> dict:
-        return {"graph_state": "escrito por B"}
+        return {"pedido": "escrito por B"}
 
     builder = StateGraph(State)
     builder.add_node("a", no_a)
@@ -84,27 +84,27 @@ def demo_overwrite() -> None:
     builder.add_edge(START, "a")
     builder.add_edge("a", "b")
     builder.add_edge("b", END)
-    print(builder.compile().invoke({"graph_state": "inicial"}))
+    print(builder.compile().invoke({"pedido": "inicial"}))
 
 
 def demo_rota_inexistente(graph) -> None:
     """Rota digitada errada NAO quebra: emite aviso e o grafo encerra.
 
-    Armadilha classica: 'node_99' nao existe, o LangGraph avisa
-    ('wrote to unknown channel branch:to:node_99, ignoring it') e segue
+    Armadilha classica: 'bebida_99' nao existe, o LangGraph avisa
+    ('wrote to unknown channel branch:to:bebida_99, ignoring it') e segue
     para o END. Se voce na ler o aviso, o grafo fica sem a etapa.
     """
 
     def rota_quebrada(state: State) -> str:
-        return "node_99"
+        return "bebida_99"
 
     builder = StateGraph(State)
-    builder.add_node("node_1", node_1)
-    builder.add_edge(START, "node_1")
-    builder.add_conditional_edges("node_1", rota_quebrada)
+    builder.add_node("no_recebe", no_recebe)
+    builder.add_edge(START, "no_recebe")
+    builder.add_conditional_edges("no_recebe", rota_quebrada)
     graph_quebrado = builder.compile()
-    print(graph_quebrado.invoke({"graph_state": "Oi,"}))
-    print("(note que node_2/node_3 NUNCA rodaram — logo nao precisa existir acima)")
+    print(graph_quebrado.invoke({"pedido": "Pedido: "}))
+    print("(note que no_suco/no_agua NUNCA rodaram — logo nao precisa existir acima)")
 
 
 def demo_chave_fora_do_schema(graph) -> None:
@@ -117,7 +117,7 @@ def demo_chave_fora_do_schema(graph) -> None:
     builder.add_node("inventor", chave_inventada)
     builder.add_edge(START, "inventor")
     builder.add_edge("inventor", END)
-    print(builder.compile().invoke({"graph_state": "valor original"}))
+    print(builder.compile().invoke({"pedido": "valor original"}))
 
 
 def main() -> None:
@@ -125,7 +125,7 @@ def main() -> None:
 
     print("=== trajetos deterministicos (seed) ===")
     for seed in (1, 2, 3, 4):
-        print(f"seed={seed} -> {mostrar_trajeto(graph, 'Oi,', seed)}")
+        print(f"seed={seed} -> {mostrar_trajeto(graph, 'Pedido: ', seed)}")
 
     print("\n=== overwrite (dois nos, mesma chave) ===")
     demo_overwrite()

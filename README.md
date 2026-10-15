@@ -135,8 +135,8 @@ Cada tabela abaixo foi executada de verdade no ambiente indicado — não é doc
 
 | Situação | O que realmente acontece |
 |---|---|
-| `mood="bravo"` no `TypedDict`/`dataclass` | entra, circula e sai — silêncio total |
-| `mood="bravo"` no Pydantic | `ValidationError` na **construção** (`literal_error`) |
+| `mood="confuso"` no `TypedDict`/`dataclass` | entra, circula e sai — silêncio total |
+| `mood="confuso"` no Pydantic | `ValidationError` na **construção** (`literal_error`) |
 | `@field_validator` com `Literal` | o `Literal` barra primeiro; o custom serve para normalizar |
 | nó em grafo DC/PY | recebe a **instância** (`state.name`); resultado do `invoke` é **dict** |
 | chave extra no Pydantic | **ignorada** por padrão (sem erro) |
@@ -159,7 +159,7 @@ Cada tabela abaixo foi executada de verdade no ambiente indicado — não é doc
 
 | Situação | O que realmente acontece |
 |---|---|
-| estado privado | `baz` existe no `stream` (`{'no_1': {'baz': 10}}`), some no `invoke` (`{'foo': 11}`) |
+| estado privado | `acrescimo` existe no `stream` (`{'calcula_taxa': {'acrescimo': 10}}`), some no `invoke` (`{'subtotal': 110}`) |
 | `input_schema`/`output_schema` | entra `pergunta`, sai só `resposta`; `notas` vivem e morrem dentro |
 | sem filtro | tudo vaza (`pergunta`, `resposta` e `notas`) |
 | nó lendo fora do próprio schema | `KeyError` (cada nó enxerga só o declarado) |

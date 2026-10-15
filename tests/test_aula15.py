@@ -6,7 +6,7 @@ from src.aula15_tempo import build_graph
 def _roda(thread: str = "t"):
     graph = build_graph()
     cfg = {"configurable": {"thread_id": thread}}
-    list(graph.stream({"messages": [HumanMessage(content="Multiplique 2 e 3", id="hum-1")]}, cfg))
+    list(graph.stream({"messages": [HumanMessage(content="Some 2 e 3", id="hum-1")]}, cfg))
     return graph, cfg
 
 
@@ -33,10 +33,10 @@ def test_fork_troca_pergunta_mantem_id():
     historico = list(graph.get_state_history(cfg))
     graph.update_state(
         historico[-2].config,
-        {"messages": [HumanMessage(content="Multiplique 5 e 3", id="hum-1")]},
+        {"messages": [HumanMessage(content="Some 5 e 3", id="hum-1")]},
     )
     atual = graph.get_state(cfg).values["messages"]
-    assert atual[0].content == "Multiplique 5 e 3"
+    assert atual[0].content == "Some 5 e 3"
     assert atual[0].id == "hum-1"  # mesmo id: substituiu, não anexou
 
 
@@ -45,7 +45,7 @@ def test_fork_executa_ramo_novo():
     historico = list(graph.get_state_history(cfg))
     fork_cfg = graph.update_state(
         historico[-2].config,
-        {"messages": [HumanMessage(content="Multiplique 5 e 3", id="hum-1")]},
+        {"messages": [HumanMessage(content="Some 5 e 3", id="hum-1")]},
     )
     chunks = list(graph.stream(None, fork_cfg, stream_mode="updates"))
     assert [list(c.keys()) for c in chunks] == [["assistant"], ["tools"], ["assistant"]]

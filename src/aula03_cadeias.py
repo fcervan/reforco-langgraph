@@ -55,7 +55,7 @@ def get_llm():
     return FakeMessagesListChatModel(responses=[fake])
 
 
-def tool_calling_llm(state: MessagesState) -> dict[str, Any]:
+def no_atendente(state: MessagesState) -> dict[str, Any]:
     llm = get_llm()
     resposta = llm.invoke(state["messages"])
     return {"messages": [resposta]}  # add_messages ANEXA; sem reducer, sobrescreveria
@@ -63,9 +63,9 @@ def tool_calling_llm(state: MessagesState) -> dict[str, Any]:
 
 def build_graph():
     builder = StateGraph(MessagesState)
-    builder.add_node("tool_calling_llm", tool_calling_llm)
-    builder.add_edge(START, "tool_calling_llm")
-    builder.add_edge("tool_calling_llm", END)
+    builder.add_node("no_atendente", no_atendente)
+    builder.add_edge(START, "no_atendente")
+    builder.add_edge("no_atendente", END)
     return builder.compile()
 
 

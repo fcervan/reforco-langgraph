@@ -6,38 +6,38 @@ import pytest
 from src.aula02_grafo import (
     State,
     build_graph,
-    decide_mood,
+    decide_bebida,
     demo_chave_fora_do_schema,
     demo_overwrite,
     demo_rota_inexistente,
-    node_1,
-    node_2,
+    no_recebe,
+    no_suco,
 )
 
 
 def test_nodes_concatenam():
-    assert node_1({"graph_state": "Oi,"}) == {"graph_state": "Oi, Eu estou "}
-    assert node_2({"graph_state": "X"}) == {"graph_state": "Xcansado!"}
+    assert no_recebe({"pedido": "Pedido: "}) == {"pedido": "Pedido: hamburguer"}
+    assert no_suco({"pedido": "X"}) == {"pedido": "X + suco"}
 
 
 def test_grafo_roda():
     random.seed(1)
-    out = build_graph().invoke({"graph_state": "Oi,"})
-    assert out["graph_state"].startswith("Oi, Eu estou ")
-    assert out["graph_state"] in ("Oi, Eu estou cansado!", "Oi, Eu estou descansado!")
+    out = build_graph().invoke({"pedido": "Pedido: "})
+    assert out["pedido"].startswith("Pedido: hamburguer")
+    assert out["pedido"] in ("Pedido: hamburguer + suco", "Pedido: hamburguer + água")
 
 
-def test_decide_mood_retorna_no_valido():
+def test_decide_bebida_retorna_no_valido():
     random.seed(0)
-    assert decide_mood({"graph_state": "x"}) in ("node_2", "node_3")
+    assert decide_bebida({"pedido": "x"}) in ("no_suco", "no_agua")
 
 
 def test_seed_deixa_deterministico():
     """Mesma seed => mesmo caminho."""
     random.seed(7)
-    a = build_graph().invoke({"graph_state": "Oi,"})["graph_state"]
+    a = build_graph().invoke({"pedido": "Pedido: "})["pedido"]
     random.seed(7)
-    b = build_graph().invoke({"graph_state": "Oi,"})["graph_state"]
+    b = build_graph().invoke({"pedido": "Pedido: "})["pedido"]
     assert a == b
 
 
@@ -63,14 +63,14 @@ def test_rota_inexistente_encerra_sem_excecao(capsys):
     graph = build_graph()
     demo_rota_inexistente(graph)
     saida = capsys.readouterr().out
-    # node_1 rodou, mas node_2/node_3 nunca (nenhum dos dois sufixos aparece)
-    assert "Oi, Eu estou " in saida
-    assert "cansado" not in saida and "descansado" not in saida
+    # no_recebe rodou, mas no_suco/no_agua nunca (nenhum dos dois sufixos aparece)
+    assert "Pedido: hamburguer" in saida
+    assert " + suco" not in saida and " + água" not in saida
 
 
 def test_mermaid_lista_nos():
     mermaid = build_graph().get_graph().draw_mermaid()
-    for no in ("node_1", "node_2", "node_3"):
+    for no in ("no_recebe", "no_suco", "no_agua"):
         assert no in mermaid
 
 
@@ -78,10 +78,10 @@ def test_aresta_para_no_inexistente_da_valueerror():
     from langgraph.graph import START, StateGraph
 
     builder = StateGraph(State)
-    builder.add_node("node_1", node_1)
-    builder.add_edge(START, "node_1")
+    builder.add_node("no_recebe", no_recebe)
+    builder.add_edge(START, "no_recebe")
     with pytest.raises(ValueError):
-        builder.add_edge("node_1", "fantasma")
+        builder.add_edge("no_recebe", "fantasma")
         builder.compile()
 
 
@@ -96,4 +96,4 @@ def test_no_sem_argumento_da_typeerror():
     builder.add_edge(START, "x")
     builder.add_edge("x", END)
     with pytest.raises(TypeError):
-        builder.compile().invoke({"graph_state": "x"})
+        builder.compile().invoke({"pedido": "x"})
