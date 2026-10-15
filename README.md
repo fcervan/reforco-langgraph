@@ -10,10 +10,10 @@ Ao final das 20 aulas você saberá montar um agente completo: que entende pedid
 
 Este reforço foi baseado no curso da **Scoras Academy**, do professor **Anderson Amaral** — os temas seguem a trilha original; todos os exemplos, textos e códigos aqui são próprios. Ficam os devidos créditos:
 
-Professor Anderson Amaral
+**Professor Anderson Amaral**
 LinkedIn: https://www.linkedin.com/in/andersonlamaral
 
-Scoras Academy
+**Scoras Academy**
 Site: https://scorasacademy.com.br
 GitHub (Somente para Alunos): https://github.com/Scoras-Academy
 
