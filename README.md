@@ -1,6 +1,6 @@
 # Reforço LangGraph — do zero até Schemas Múltiplos
 
-[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) [![Abrir 07 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb) [![Abrir 08 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/08_reducers.ipynb) [![Abrir 09 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/09_schemas_multiplos.ipynb)
+[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) [![Abrir 07 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb) [![Abrir 08 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/08_reducers.ipynb) [![Abrir 09 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/09_schemas_multiplos.ipynb) [![Abrir 10 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/10_filtro_corte.ipynb)
 
 Estudo aula a aula para dev clássico/determinístico entender LangGraph
 de verdade: cada notebook tem analogia com `função + dict + if/else`,
@@ -35,6 +35,14 @@ Sem chave, tudo roda **offline** com Fake determinístico.
       tolerante a `None`, 3 poderes do `add_messages`, estado estendido
 - [x] 09 Schemas Múltiplos — estado privado (viaja, some), `input_schema` /
       `output_schema` (nomes novos; `input=`/`output=` depreciados)
+
+## Bloco 2 — módulos 3–4 do curso (aulas 10+)
+
+- [x] 10 Filtro e corte — apagar do estado (`RemoveMessage`), filtrar só no
+      `invoke`, cortar por tokens (`trim_messages`: system, `start_on`, parcial)
+- [ ] 11 Streaming, interrupção e HITL; 12 Breakpoints; 13 Feedback humano;
+      14 Breakpoints dinâmicos; 15 Viagem no tempo; 16 Paralelização;
+      17 Sub-grafos; 18 Sub-grafos no LangSmith; 19 MapReduce
 
 Mapeia `Curso_Introdutorio_de_Langgraph/module-1` e `modulo-2`.
 
@@ -108,6 +116,8 @@ src/aula08_reducers.py        # overwrite, fan-out, operator.add, custom, add_me
 notebooks/08_reducers.ipynb     # 18 células: célula pip, quebra, [1,2,3,3], None, 3 poderes, exercício, desafio
 src/aula09_schemas_multiplos.py # privado (baz) + in/out (notas) + sem-filtro
 notebooks/09_schemas_multiplos.ipynb # 18 células: privado, in/out, contraste, KeyError, injeção, avaliador, fechamento
+src/aula10_filtro_corte.py      # apagar, filtrar, trim, start_on, parcial, filter por tipo
+notebooks/10_filtro_corte.ipynb   # 19 células: comanda, 3 táticas, system/start_on/parcial, exercício, desafio
 tests/test_aula00.py ...    # offline, determinístico
 ```
 
@@ -184,6 +194,17 @@ tests/test_aula00.py ...    # offline, determinístico
 | sem filtro | tudo vaza (`pergunta`, `resposta` e `notas`) |
 | nó lendo fora do próprio schema | `KeyError` (cada nó enxerga só o declarado) |
 | `input=`/`output=` (nomes do curso) | funcionam, mas emitem `LangGraphDeprecatedSinceV05` (usar `input_schema=`) |
+
+## Comportamentos verificados na Aula 10 (langchain-core 1.6.x)
+
+| Situação | O que realmente acontece |
+|---|---|
+| `RemoveMessage` no estado | apaga de verdade (próximos turnos não veem); exige `id` + reducer |
+| filtro só no `invoke` | estado intacto (6 msgs), LLM vê recorte (1 msg) |
+| `trim` sem `include_system` | SYS cai junto; com, é preservado fora do teto |
+| `start_on="human"` + teto apertado | descarta até sobrar quase nada (aqui: só o system) |
+| `allow_partial=True` | salva o **fim** da longa (por linhas); de 1 linha só, cai inteira |
+| `token_counter=len` | conta **mensagens**, não tokens — usar tiktoken/contador do modelo |
 
 ## O que a Aula 00 ensina
 
