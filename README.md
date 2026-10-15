@@ -10,11 +10,11 @@ Ao final das 20 aulas você saberá montar um agente completo: que entende pedid
 
 Este reforço foi baseado no curso da **Scoras Academy**, do professor **Anderson Amaral** — os temas seguem a trilha original; todos os exemplos, textos e códigos aqui são próprios. Ficam os devidos créditos:
 
-**Professor Anderson Amaral**
+**Professor Anderson Amaral**<br>
 LinkedIn: https://www.linkedin.com/in/andersonlamaral
 
-**Scoras Academy**
-Site: https://scorasacademy.com.br
+**Scoras Academy**<br>
+Site: https://scorasacademy.com.br<br>
 GitHub (Somente para Alunos): https://github.com/Scoras-Academy
 
 Padrão técnico: Groq como LLM primário (`GROQ_API_KEY` via `.env`, nunca versionado), modelo `openai/gpt-oss-20b` sempre com `reasoning_effort="low"`. Sem chave, tudo roda **offline** com Fake determinístico. Regras do projeto em [`AGENTS.md`](AGENTS.md).
