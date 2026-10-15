@@ -1,6 +1,6 @@
 # Reforço LangGraph — do zero até Schemas Múltiplos
 
-[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) [![Abrir 07 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb) [![Abrir 08 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/08_reducers.ipynb) [![Abrir 09 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/09_schemas_multiplos.ipynb) [![Abrir 10 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/10_filtro_corte.ipynb) [![Abrir 11 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/11_streaming_hitl.ipynb) [![Abrir 12 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/12_breakpoints.ipynb) [![Abrir 13 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/13_feedback_humano.ipynb) [![Abrir 14 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/14_breakpoints_dinamicos.ipynb) [![Abrir 15 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/15_viagem_tempo.ipynb)
+[![Abrir 00 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/00_visao_geral.ipynb) [![Abrir 01 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/01_setup.ipynb) [![Abrir 02 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/02_grafos.ipynb) [![Abrir 03 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/03_cadeias.ipynb) [![Abrir 04 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/04_roteadores.ipynb) [![Abrir 05 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/05_agente_react.ipynb) [![Abrir 06 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/06_memoria.ipynb) [![Abrir 07 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/07_schemas.ipynb) [![Abrir 08 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/08_reducers.ipynb) [![Abrir 09 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/09_schemas_multiplos.ipynb) [![Abrir 10 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/10_filtro_corte.ipynb) [![Abrir 11 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/11_streaming_hitl.ipynb) [![Abrir 12 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/12_breakpoints.ipynb) [![Abrir 13 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/13_feedback_humano.ipynb) [![Abrir 14 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/14_breakpoints_dinamicos.ipynb) [![Abrir 15 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/15_viagem_tempo.ipynb) [![Abrir 16 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fcervan/reforco-langgraph/blob/main/notebooks/16_paralelizacao.ipynb)
 
 Estudo aula a aula para dev clássico/determinístico entender LangGraph
 de verdade: cada notebook tem analogia com `função + dict + if/else`,
@@ -50,7 +50,9 @@ Sem chave, tudo roda **offline** com Fake determinístico.
       `interrupt()` + `Command(resume=)`, motivo em `tasks[].interrupts`
 - [x] 15 Viagem no tempo — `get_state_history` (novo→antigo), replay com config
       antiga, fork com `update_state` (mesmo `id` substitui, novo anexa)
-- [ ] 16 Paralelização; 17 Sub-grafos; 18 Sub-grafos no LangSmith; 19 MapReduce
+- [x] 16 Paralelização — fan-out simétrico (join 1x) vs desigual (1x por chegada),
+      `sorting_reducer`, RAG paralelo (2 fontes + síntese)
+- [ ] 17 Sub-grafos; 18 Sub-grafos no LangSmith; 19 MapReduce
 
 Mapeia `Curso_Introdutorio_de_Langgraph/module-1` e `modulo-2`.
 
@@ -136,6 +138,8 @@ src/aula14_dinamico.py        # régua (NodeInterrupt), trava, desconto, API nov
 notebooks/14_breakpoints_dinamicos.ipynb # 17 células: régua, motivo, trava, API nova, estático, exercício, desafio
 src/aula15_tempo.py           # navega, reproduz, bifurca (Fake determinístico)
 notebooks/15_viagem_tempo.ipynb   # 17 células: fita, replay, fork, id novo, auditoria, desafio
+src/aula16_paralelo.py        # simétrico 1x, desigual 2x, sorting, RAG paralelo
+notebooks/16_paralelizacao.ipynb  # 17 células: fan-out/in, 2x, sorting, RAG, exercício, desafio
 tests/test_aula00.py ...    # offline, determinístico
 ```
 
@@ -269,6 +273,15 @@ tests/test_aula00.py ...    # offline, determinístico
 | replay `stream(None, config_antiga)` | reexecuta a partir dali; passado intacto (com LLM real pode divergir) |
 | fork com mesmo `id` | substitui a mensagem; com id novo, anexa (duplica) |
 | após `update_state` no passado | nada executa até `stream(None, fork_config)`; `get_state` mostra o ramo novo |
+
+## Comportamentos verificados na Aula 16 (LangGraph 1.2.x)
+
+| Situação | O que realmente acontece |
+|---|---|
+| fan-out simétrico → join | espera os 2 ramos; join roda **1x** |
+| fan-out desigual → join | **1x por chegada** (2x); 2ª execução vê o efeito da 1ª |
+| `sorting_reducer` | mesma saída ordenada nas 3 execuções (fim da loteria) |
+| RAG paralelo | 2 fontes juntas + 1 síntese (Groq real cita valores; Fake conta fontes) |
 
 ## O que a Aula 00 ensina
 
